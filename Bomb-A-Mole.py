@@ -11,35 +11,36 @@ import math
 # highscoreButton = button(command = displayhighscore)
 # quitButton = button(command = quit)
 
-carrot = pygame.image.load('carrot.png')
-cabbage = pygame.image.load('cabbage.png')
-bomb = pygame.image.load('bomb.png')
-crater = pygame.image.load('crater.png')
-
 
 # objects/classes:
 
 class cell:
-	def __init__(self,type,left,top,width,height):
+	def __init__(self,type,xCoord,yCoord):
+	
+		self.carrot = pygame.image.load('carrot.png')
+		self.cabbage = pygame.image.load('cabbage.png')
+		self.bomb = pygame.image.load('bomb.png')
+		self.crater = pygame.image.load('crater.png')
+	
 		self.kind = type
 		
-		self.left = left
-		self.top = top
-		self.width = width
-		self.height = height
+		self.x = xCoord
+		self.y = yCoord
 		
-		self.disp = Rect(self.left,self.top,self.width,self.height)
+# 		self.disp = Rect(self.left,self.top,self.width,self.height)
+
+		self.kind = random.randint(1,2)
 		
 		if self.kind == 1:
-			self.image = carrot
+			self.image = self.carrot
 		elif self.kind == 2:
-			self.image = cabbage
+			self.image = self.cabbage
 		elif self.kind == 3:
-			self.image = bomb
+			self.image = self.bomb
 		elif self.kind == 4:
-			self.image = crater
+			self.image = self.crater
 		
-		self.image.get_rect()
+		self.disp = self.image.get_rect(center = (self.x,self.y))
 		
 # 	def action:
 # 		when mouse clicks:
@@ -111,14 +112,19 @@ class game:
 		pygame.init()
 		self.size = width, height = 1200, 650
 		self.screen = pygame.display.set_mode(self.size)
-# 		self.cells = [[cell(0,0,0),cell(0,1,0),cell(0,2,0),cell(0,3,0),cell(0,4,0),cell(0,5,0)],[cell(0,0,0),cell(0,1,1),cell(0,2,1),cell(0,3,1),cell(0,4,1),cell(0,5,1)],[cell(0,0,2),cell(0,1,2),cell(0,2,2),cell(0,3,2),cell(0,4,2),cell(0,5,2)],[cell(0,0,3),cell(0,1,3),cell(0,2,3),cell(0,3,3),cell(0,4,3),cell(0,5,3)],[cell(0,0,4),cell(0,1,4),cell(0,2,4),cell(0,3,4),cell(0,4,4),cell(0,5,4)],[cell(0,0,5),cell(0,1,5),cell(0,2,5),cell(0,3,5),cell(0,4,5),cell(0,5,5)]]
-		self.cell = cell(1,5,5,80,80)
-		self.screen.blit(self.cell.image,(self.cell.left,self.cell.top))
+		
+# 		self.cells = [cell(1,80,80),cell(1,161,80),cell(1,242,80),cell(1,323,80),cell(1,404,80),cell(1,485,80),cell(1,80,161),cell(1,161,161),cell(1,242,161),cell(1,323,161),cell(1,404,161),cell(1,485,161),cell(1,80,242),cell(1,161,242),cell(1,242,242),cell(1,323,242),cell(1,404,242),cell(1,485,242),cell(1,80,323),cell(1,161,323),cell(1,242,323),cell(1,323,323),cell(1,404,323),cell(1,485,323),cell(1,80,404),cell(1,161,404),cell(1,242,404),cell(1,323,404),cell(1,404,404),cell(1,485,404),cell(1,80,485),cell(1,161,485),cell(1,242,485),cell(1,323,485),cell(1,404,485),cell(1,485,485)]
+
+		self.cells = [cell(1,120,120),cell(1,201,120),cell(1,282,120),cell(1,363,120),cell(1,444,120),cell(1,525,120),cell(1,120,201),cell(1,201,201),cell(1,282,201),cell(1,363,201),cell(1,444,201),cell(1,525,201),cell(1,120,282),cell(1,201,282),cell(1,282,282),cell(1,363,282),cell(1,444,282),cell(1,525,282),cell(1,120,363),cell(1,201,363),cell(1,282,363),cell(1,363,363),cell(1,444,363),cell(1,525,363),cell(1,120,444),cell(1,201,444),cell(1,282,444),cell(1,363,444),cell(1,444,444),cell(1,525,444),cell(1,120,525),cell(1,201,525),cell(1,282,525),cell(1,363,525),cell(1,444,525),cell(1,525,525)]
+		
 		while 1:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					sys.exit()
+			for i in self.cells:
+				self.screen.blit(i.image,i.disp)
+				pygame.display.flip()
 
 game = game()
 
