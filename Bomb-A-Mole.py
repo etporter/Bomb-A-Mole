@@ -11,10 +11,6 @@ startButton = button(command = gameloop)
 highscoreButton = button(command = displayhighscore)
 quitButton = button(command = quit)
 
-carrot = image
-cabbage = image
-bomb = image
-crater = image
 
 
 # objects/classes:
