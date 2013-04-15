@@ -11,6 +11,10 @@ startButton = button(command = gameloop)
 highscoreButton = button(command = displayhighscore)
 quitButton = button(command = quit)
 
+carrot = pygame.image.load('carrot.png')
+cabbage = pygame.image.load('cabbage.png')
+bomb = pygame.image.load('bomb.png')
+crater = pygame.image.load('crater.png')
 
 
 # objects/classes:
