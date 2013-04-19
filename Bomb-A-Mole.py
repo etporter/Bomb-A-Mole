@@ -42,11 +42,11 @@ class cell:
 		
 		self.disp = self.image.get_rect(center = (self.x,self.y))
 		
-	def placeBomb(self):
+	def placeBomb(self,mouseX,mouseY):
 # 		print 'placeBomb activated!'
-		self.mouseLoc = pygame.mouse.get_pos()
-		self.mouseX = self.mouseLoc[0]
-		self.mouseY = self.mouseLoc[1]
+# 		if playerTurn = True:
+		self.mouseX = mouseX
+		self.mouseY = mouseY
 		if abs(self.x - self.mouseX) <= 40 and abs(self.y - self.mouseY) <= 40:
 # 			print 'placeBomb if sequence activated!'
 			self.kind = 3
@@ -56,15 +56,6 @@ class cell:
 # 		for event in pygame.event.get():
 # 			if event.type == MOUSEBUTTONDOWN:
 # 				print 'Mouse clicked!'
-
-# 	def action:
-# 		when mouse clicks:
-# 			if mouseX is inside range (xMax-xMin) and mouseY is inside range (yMax-yMin):
-# 				if playerTurn = True
-# 					placeBomb
-# 	def placeBomb:
-# 		self.kind = 2
-# 		Image = bomb
 
 # class mole:
 # 	def __init__(self,Xcoord,YCoord):
@@ -132,13 +123,17 @@ class game:
 		
 		while 1:
 			for event in pygame.event.get():
+				if event.type == MOUSEBUTTONUP:
+# 					print 'Mouse clicked!'
+					# self.mouseLoc = event.pos
+# 					self.mX = self.mouseLoc[0]
+# 					self.mY = self.mouseLoc[1]
+					self.mX, self.mY = event.pos
+					for i in self.cells:
+						cell.placeBomb(i,self.mX,self.mY)
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					sys.exit()
-				if event.type == MOUSEBUTTONDOWN:
-# 					print 'Mouse clicked!'
-					for i in self.cells:
-						cell.placeBomb(i)
 			for i in self.cells:
 				self.screen.blit(i.image,i.disp)
 				pygame.display.flip()
