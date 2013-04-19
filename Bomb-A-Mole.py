@@ -169,14 +169,45 @@ class cell:
 
 class mole:
 	def __init__(self):
-		squareCenters = [(120,120),(201,120),(282,120),(363,120),(444,120),(525,120),(120,201),(201,201),(282,201),(363,201),(444,201),(525,201),(120,282),(201,282),(282,282),(363,282),(444,282),(525,282),(120,363),(201,363),(282,363),(363,363),(444,363),(525,363),(120,444),(201,444),(282,444),(363,444),(444,444),(525,444),(120,525),(201,525),(282,525),(363,525),(444,525),(525,525)]
-
+		self.squareCenters = [(120,120),(201,120),(282,120),(363,120),(444,120),(525,120),(120,201),(201,201),(282,201),(363,201),(444,201),(525,201),(120,282),(201,282),(282,282),(363,282),(444,282),(525,282),(120,363),(201,363),(282,363),(363,363),(444,363),(525,363),(120,444),(201,444),(282,444),(363,444),(444,444),(525,444),(120,525),(201,525),(282,525),(363,525),(444,525),(525,525)]
+		self.position = random.choice(self.squareCenters)
+		
+		self.locationIndex = self.squareCenters.index(self.position)
+		
+		self.x = self.position[0]
+		self.y = self.position[1]
+		
+		print self.x,self.y
+		
+	def move(self):
+# 		self.moveChoices = self.squareCenters[self.moveChoicesIndex]
+		
+		self.moveChoices = []
+		
+		self.moveChoices.append(self.squareCenters[int(self.locationIndex+1)])
+		self.moveChoices.append(self.squareCenters[int(self.locationIndex-1)])
+		self.moveChoices.append(self.squareCenters[int(self.locationIndex+6)])
+		self.moveChoices.append(self.squareCenters[int(self.locationIndex-6)])
+		
+		print self.moveChoices
+	
+		self.position = random.choice(self.moveChoices)
+		
+		self.x = self.position[0]
+		self.y = self.position[1]
+		
+		print 'New coordinates:',self.x,self.y
+		
+		self.locationIndex = self.squareCenters.index(self.position)
+			
 class game:
 	def __init__(self):
 		self.size = width, height = 1200, 650
 		self.screen = pygame.display.set_mode(self.size)
 
 		self.cells = [cell(1,120,120),cell(1,201,120),cell(1,282,120),cell(1,363,120),cell(1,444,120),cell(1,525,120),cell(1,120,201),cell(1,201,201),cell(1,282,201),cell(1,363,201),cell(1,444,201),cell(1,525,201),cell(1,120,282),cell(1,201,282),cell(1,282,282),cell(1,363,282),cell(1,444,282),cell(1,525,282),cell(1,120,363),cell(1,201,363),cell(1,282,363),cell(1,363,363),cell(1,444,363),cell(1,525,363),cell(1,120,444),cell(1,201,444),cell(1,282,444),cell(1,363,444),cell(1,444,444),cell(1,525,444),cell(1,120,525),cell(1,201,525),cell(1,282,525),cell(1,363,525),cell(1,444,525),cell(1,525,525)]
+		
+		self.mole = mole()
 		
 		while 1:
 			pygame.mouse.set_cursor(cursorsize,(12,12),*mousecursor)
@@ -191,6 +222,9 @@ class game:
 # 					print self.mX,self.mY
 					for i in self.cells:
 						cell.placeBomb(i,self.mX,self.mY)
+					
+					mole.move(self.mole)
+						
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					sys.exit()
