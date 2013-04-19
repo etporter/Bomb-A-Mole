@@ -13,7 +13,7 @@ import math
 
 
 # objects/classes:
-
+#Cursers Here
 class cell:
 	def __init__(self,type,xCoord,yCoord):
 		
