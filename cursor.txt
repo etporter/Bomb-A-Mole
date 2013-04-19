@@ -22,9 +22,3 @@
 "                XX.....X",
 "                 XX...XX",
 "                  XXXXX ")
-
-<<<<<<< HEAD
-#MyComment is better tbh
-=======
-#ethan was here
->>>>>>> lets get this thing working
