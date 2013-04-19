@@ -39,31 +39,31 @@ pygame.init()
 # "                 XX...XX",
 # "                  XXXXX ")
 
-# thickarrow_strings = (               #sized 24x24
-# "        X.X.X.X.        ",
-# "     X.X.X.X.X.X.X.     ",
-# "    X.X    .X    .X.    ",
-# "   .X      X.      .X   ",
-# "  X.       .X       X.  ",
-# " .X        X.        .X ",
-# " X.        .X        X. ",
-# " X         X.         X ",
-# "X.         .X         X.",
-# ".X         X.         .X",
-# "X.         .X         X.",
-# ".X.X.X.X.X.X.X.X.X.X.X.X",
-# "X.X.X.X.X.X.X.X.X.X.X.X.",
-# ".X         X.         .X",
-# "X.         .X         X.",
-# ".X         X.         .X",
-# " X         .X         X ",
-# " X.        X.        .X ",
-# " .X        .X        X. ",
-# "  X.       X.       .X  ",
-# "   .X      .X      XX   ",
-# "    X.X    X.    X.X    ",
-# "     X.X.XX.X.X.X.X     ",
-# "        X.XX.XXX        ")
+thickarrow_strings = (               #sized 24x24
+"        X.X.X.X.        ",
+"     X.X.X.X.X.X.X.     ",
+"    X.X    .X    .X.    ",
+"   .X      X.      .X   ",
+"  X.       .X       X.  ",
+" .X        X.        .X ",
+" X.        .X        X. ",
+" X         X.         X ",
+"X.         .X         X.",
+".X         X.         .X",
+"X.         .X         X.",
+".X.X.X.X.X.X.X.X.X.X.X.X",
+"X.X.X.X.X.X.X.X.X.X.X.X.",
+".X         X.         .X",
+"X.         .X         X.",
+".X         X.         .X",
+" X         .X         X ",
+" X.        X.        .X ",
+" .X        .X        X. ",
+"  X.       X.       .X  ",
+"   .X      .X      XX   ",
+"    X.X    X.    X.X    ",
+"     X.X.XX.X.X.X.X     ",
+"        X.XX.XXX        ")
 
 mousecursor = pygame.cursors.compile(thickarrow_strings, black='X', white='.', xor='o')
 
@@ -107,10 +107,10 @@ class cell:
 # 		self.mouseY = self.mouseLoc[1]
 		self.mouseX = mouseX
 		self.mouseY = mouseY
-		print self.mouseX, self.mouseY
+# 		print self.mouseX, self.mouseY
 		if abs(self.x - self.mouseX) <= 40 and abs(self.y - self.mouseY) <= 40:
 # 			print 'placeBomb if sequence activated!'
-			print self.mouseX, self.mouseY
+# 			print self.mouseX, self.mouseY
 			self.kind = 3
 			self.image = self.bomb
 	
@@ -176,16 +176,16 @@ class game:
 		self.cells = [cell(1,120,120),cell(1,201,120),cell(1,282,120),cell(1,363,120),cell(1,444,120),cell(1,525,120),cell(1,120,201),cell(1,201,201),cell(1,282,201),cell(1,363,201),cell(1,444,201),cell(1,525,201),cell(1,120,282),cell(1,201,282),cell(1,282,282),cell(1,363,282),cell(1,444,282),cell(1,525,282),cell(1,120,363),cell(1,201,363),cell(1,282,363),cell(1,363,363),cell(1,444,363),cell(1,525,363),cell(1,120,444),cell(1,201,444),cell(1,282,444),cell(1,363,444),cell(1,444,444),cell(1,525,444),cell(1,120,525),cell(1,201,525),cell(1,282,525),cell(1,363,525),cell(1,444,525),cell(1,525,525)]
 		
 		while 1:
-			pygame.mouse.set_cursor(cursorsize,(1,1),*mousecursor)
+			pygame.mouse.set_cursor(cursorsize,(12,12),*mousecursor)
 			
 			for event in pygame.event.get():
 				if event.type == MOUSEBUTTONDOWN:
 # 					print 'Mouse clicked!'
 					self.mouseLoc = pygame.mouse.get_pos()
-					print self.mouseLoc
+# 					print self.mouseLoc
 					self.mX = self.mouseLoc[0]
 					self.mY = self.mouseLoc[1]
-					print self.mX,self.mY
+# 					print self.mX,self.mY
 					for i in self.cells:
 						cell.placeBomb(i,self.mX,self.mY)
 				if event.type == pygame.QUIT:
