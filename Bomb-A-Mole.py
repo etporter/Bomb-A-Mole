@@ -178,25 +178,60 @@ class mole:
 		self.y = self.position[1]
 		
 		print self.x,self.y
+		print ''
+		print self.locationIndex
+		print ''
 		
 	def move(self):
 # 		self.moveChoices = self.squareCenters[self.moveChoicesIndex]
 		
 		self.moveChoices = []
 		
-		self.moveChoices.append(self.squareCenters[int(self.locationIndex+1)])
-		self.moveChoices.append(self.squareCenters[int(self.locationIndex-1)])
-		self.moveChoices.append(self.squareCenters[int(self.locationIndex+6)])
-		self.moveChoices.append(self.squareCenters[int(self.locationIndex-6)])
+		try:
+			self.moveChoices.append(self.squareCenters[int(self.locationIndex+1)])
+		except IndexError:
+			print 'This is out of range, no biggie'
+			
+		try:
+			self.moveChoices.append(self.squareCenters[int(self.locationIndex-1)])
+		except IndexError:
+			print 'This is out of range, no biggie'
+			
+		try:
+			self.moveChoices.append(self.squareCenters[int(self.locationIndex+6)])
+		except IndexError:
+			print 'This is out of range, no biggie'
+			
+		try:
+			self.moveChoices.append(self.squareCenters[int(self.locationIndex-6)])
+		except IndexError:
+			print 'This is out of range, no biggie'
 		
+		for i in self.moveChoices:
+			self.iIndex = self.squareCenters.index(i)
+			if abs(self.iIndex-self.locationIndex) == 1 and abs(i[0]-self.position[0]) > 82:
+				self.moveChoices.remove(i)
+		
+		self.moveChoicesIndex = []
+		
+		for j in self.moveChoices:
+			k = self.squareCenters.index(j)
+			self.moveChoicesIndex.append(k)
+			
 		print self.moveChoices
+		print ''
+		print self.moveChoicesIndex
+		print ''
 	
 		self.position = random.choice(self.moveChoices)
 		
 		self.x = self.position[0]
 		self.y = self.position[1]
 		
+		self.locationIndex = self.squareCenters.index(self.position)
+		
 		print 'New coordinates:',self.x,self.y
+		print 'New index:',self.locationIndex
 		
 		self.locationIndex = self.squareCenters.index(self.position)
 			
