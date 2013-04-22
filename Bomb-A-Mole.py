@@ -68,7 +68,7 @@ pygame.init()
 thickarrow_strings = (               #sized 24x24
 "       XXXXXXXXXX       ",
 "     XX..........XX     ",
-"    X..XXXX..XXX..X.    ",
+"    X..XXXX..XXXX..X    ",
 "   X.XX   X..X   XX.X   ",
 "  X.X     X..X     X.X  ",
 " X.X      X..X      X.X ",
@@ -87,7 +87,7 @@ thickarrow_strings = (               #sized 24x24
 " X.X      X..X      X.X ",
 "  X.X     X..X     X.X  ",
 "   X.XX   X..X   XX.X   ",
-"    X..XXXX..XXX..X.    ",
+"    X..XXXX..XXXX..X    ",
 "     XX..........XX     ",
 "       XXXXXXXXXX       ")
 
@@ -139,6 +139,10 @@ class cell:
 # 			print self.mouseX, self.mouseY
 			self.kind = 3
 			self.image = self.bomb
+	
+	def boom(self):
+		self.kind = 4
+		self.image = self.crater
 	
 # 	def clickOn(self):
 # 		for event in pygame.event.get():
@@ -270,6 +274,8 @@ class game:
 		
 		self.mole = mole()
 		
+		self.clickCount = 0
+		
 		while 1:
 			pygame.mouse.set_cursor(cursorsize,(12,12),*mousecursor)
 			
@@ -281,8 +287,17 @@ class game:
 					self.mX = self.mouseLoc[0]
 					self.mY = self.mouseLoc[1]
 # 					print self.mX,self.mY
+
+					if self.clickCount < 3:
+						self.clickCount += 1
+					else:
+						self.clickCount = 0
+					
+
 					for i in self.cells:
 						cell.placeBomb(i,self.mX,self.mY)
+						if i.kind == 3 and self.clickCount == 3:
+							cell.boom(i)
 					
 					mole.move(self.mole)
 						
@@ -292,6 +307,11 @@ class game:
 			for i in self.cells:
 				self.screen.blit(i.image,i.disp)
 				pygame.display.flip()
+				
+				if i.kind == 3:
+					if self.mole.x == i.x and self.mole.y == i.y:
+						print 'Mole killed!'
+						self.mole = mole()
 
 game = game()
 
