@@ -112,10 +112,6 @@ class cell:
 		
 		self.bombTicker = 0
 		
-# 		self.disp = Rect(self.left,self.top,self.width,self.height)
-
-		self.kind = random.randint(1,2)
-		
 		if self.kind == 1:
 			self.image = self.carrot
 		elif self.kind == 2:
@@ -151,6 +147,13 @@ class cell:
 	def boom(self,count):
 		self.bombTicker = count
 		if self.bombTicker == 3:
+			self.kind = 4
+			self.image = self.crater
+			
+	def eaten(self,count):
+		self.moleTicker = count
+		if self.moleTicker == 3:
+			print 'Veggie eaten!'
 			self.kind = 4
 			self.image = self.crater
 
@@ -263,10 +266,11 @@ class game:
 	def __init__(self):
 		self.size = 1200, 650
 		self.screen = pygame.display.set_mode(self.size)
-
-		self.cells = [cell(1,120,120),cell(1,201,120),cell(1,282,120),cell(1,363,120),cell(1,444,120),cell(1,525,120),cell(1,120,201),cell(1,201,201),cell(1,282,201),cell(1,363,201),cell(1,444,201),cell(1,525,201),cell(1,120,282),cell(1,201,282),cell(1,282,282),cell(1,363,282),cell(1,444,282),cell(1,525,282),cell(1,120,363),cell(1,201,363),cell(1,282,363),cell(1,363,363),cell(1,444,363),cell(1,525,363),cell(1,120,444),cell(1,201,444),cell(1,282,444),cell(1,363,444),cell(1,444,444),cell(1,525,444),cell(1,120,525),cell(1,201,525),cell(1,282,525),cell(1,363,525),cell(1,444,525),cell(1,525,525)]
+		self.cells = [cell(random.randint(1,2),120,120),cell(random.randint(1,2),201,120),cell(random.randint(1,2),282,120),cell(random.randint(1,2),363,120),cell(random.randint(1,2),444,120),cell(random.randint(1,2),525,120),cell(random.randint(1,2),120,201),cell(random.randint(1,2),201,201),cell(random.randint(1,2),282,201),cell(random.randint(1,2),363,201),cell(random.randint(1,2),444,201),cell(random.randint(1,2),525,201),cell(random.randint(1,2),120,282),cell(random.randint(1,2),201,282),cell(random.randint(1,2),282,282),cell(random.randint(1,2),363,282),cell(random.randint(1,2),444,282),cell(random.randint(1,2),525,282),cell(random.randint(1,2),120,363),cell(random.randint(1,2),201,363),cell(random.randint(1,2),282,363),cell(random.randint(1,2),363,363),cell(random.randint(1,2),444,363),cell(random.randint(1,2),525,363),cell(random.randint(1,2),120,444),cell(random.randint(1,2),201,444),cell(random.randint(1,2),282,444),cell(random.randint(1,2),363,444),cell(random.randint(1,2),444,444),cell(random.randint(1,2),525,444),cell(random.randint(1,2),120,525),cell(random.randint(1,2),201,525),cell(random.randint(1,2),282,525),cell(random.randint(1,2),363,525),cell(random.randint(1,2),444,525),cell(random.randint(1,2),525,525)]
 		
 		self.mole = mole()
+		
+		self.clickCount = 0
 		
 		while 1:
 			pygame.mouse.set_cursor(cursorsize,(12,12),*mousecursor)
@@ -280,10 +284,10 @@ class game:
 					self.mY = self.mouseLoc[1]
 # 					print self.mX,self.mY
 
-# 					if self.clickCount < 3:
-# 						self.clickCount += 1
-# 					else:
-# 						self.clickCount = 0
+					if self.clickCount < 3:
+						self.clickCount += 1
+					else:
+						self.clickCount = 0
 					
 
 					for i in self.cells:
@@ -304,12 +308,20 @@ class game:
 				self.screen.blit(i.image,i.disp)
 				pygame.display.flip()
 				
-				if i.kind == 3:
-					if self.mole.x == i.x and self.mole.y == i.y:
+				if self.mole.x == i.x and self.mole.y == i.y:
+					self.moleSquare = i.kind
+					if i.kind == 3:
 						print 'Mole killed!'
 						cell.boom(i,3)
 						del self.mole
 						self.mole = mole()
+					if i.kind == 1 or i.kind == 2:
+						cell.eaten(i,self.clickCount)
+
+			self.moleCell = cell(self.moleSquare,880,120)
+			
+			self.screen.blit(self.moleCell.image,self.moleCell.disp)
+			pygame.display.flip()
 
 game = game()
 
