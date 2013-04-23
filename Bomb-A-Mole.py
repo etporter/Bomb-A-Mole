@@ -110,6 +110,8 @@ class cell:
 		self.x = xCoord
 		self.y = yCoord
 		
+		self.bombTicker = 0
+		
 # 		self.disp = Rect(self.left,self.top,self.width,self.height)
 
 		self.kind = random.randint(1,2)
@@ -131,30 +133,26 @@ class cell:
 # 		self.mouseLoc = pygame.mouse.get_pos()
 # 		self.mouseX = self.mouseLoc[0]
 # 		self.mouseY = self.mouseLoc[1]
+		
 		self.mouseX = mouseX
 		self.mouseY = mouseY
+
 # 		print self.mouseX, self.mouseY
+		
 		if abs(self.x - self.mouseX) <= 40 and abs(self.y - self.mouseY) <= 40:
+
 # 			print 'placeBomb if sequence activated!'
 # 			print self.mouseX, self.mouseY
+	
+			self.bombTicker = 0
 			self.kind = 3
 			self.image = self.bomb
 	
-	def boom(self):
-		self.kind = 4
-		self.image = self.crater
-	
-# 	def clickOn(self):
-# 		for event in pygame.event.get():
-# 			if event.type == MOUSEBUTTONDOWN:
-# 				print 'Mouse clicked!'
-
-# class mole:
-# 	def __init__(self,Xcoord,YCoord):
-# 	
-# 	def bombed:
-# 		squeal
-# 		die
+	def boom(self,count):
+		self.bombTicker = count
+		if self.bombTicker == 3:
+			self.kind = 4
+			self.image = self.crater
 
 
 # Basic Game Logic:
@@ -164,16 +162,12 @@ class cell:
 # # Enter Game Loop:
 # 	
 # 	Game build == 1;
-# 	Set level = 1;
 # 	Set Score = 0;
 # 
-# 	If user has clicked the maximum number of boxes:
-# 		Generate animation, or image change
-# 
 # 	if user hits mole:
-# 		Level win
+# 		Kill Mole
 # 		Add score
-# 		Add level
+# 		New Mole
 # 	elif: 
 # 		Loop
 # 		Add score
@@ -288,16 +282,20 @@ class game:
 					self.mY = self.mouseLoc[1]
 # 					print self.mX,self.mY
 
-					if self.clickCount < 3:
-						self.clickCount += 1
-					else:
-						self.clickCount = 0
+# 					if self.clickCount < 3:
+# 						self.clickCount += 1
+# 					else:
+# 						self.clickCount = 0
 					
 
 					for i in self.cells:
+# 						if i.bombTicker 
+# 						self.ticker = i.bombTicker
+# 						self.ticker += 1
+						i.bombTicker += 1
 						cell.placeBomb(i,self.mX,self.mY)
-						if i.kind == 3 and self.clickCount == 3:
-							cell.boom(i)
+						if i.kind == 3:
+							cell.boom(i,i.bombTicker)
 					
 					mole.move(self.mole)
 						
@@ -311,6 +309,7 @@ class game:
 				if i.kind == 3:
 					if self.mole.x == i.x and self.mole.y == i.y:
 						print 'Mole killed!'
+						del self.mole
 						self.mole = mole()
 
 game = game()
