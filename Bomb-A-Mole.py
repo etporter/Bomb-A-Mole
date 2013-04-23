@@ -309,6 +309,7 @@ class game:
 				if i.kind == 3:
 					if self.mole.x == i.x and self.mole.y == i.y:
 						print 'Mole killed!'
+						cell.boom(i,3)
 						del self.mole
 						self.mole = mole()
 
