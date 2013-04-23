@@ -261,14 +261,12 @@ class mole:
 			
 class game:
 	def __init__(self):
-		self.size = width, height = 1200, 650
+		self.size = 1200, 650
 		self.screen = pygame.display.set_mode(self.size)
 
 		self.cells = [cell(1,120,120),cell(1,201,120),cell(1,282,120),cell(1,363,120),cell(1,444,120),cell(1,525,120),cell(1,120,201),cell(1,201,201),cell(1,282,201),cell(1,363,201),cell(1,444,201),cell(1,525,201),cell(1,120,282),cell(1,201,282),cell(1,282,282),cell(1,363,282),cell(1,444,282),cell(1,525,282),cell(1,120,363),cell(1,201,363),cell(1,282,363),cell(1,363,363),cell(1,444,363),cell(1,525,363),cell(1,120,444),cell(1,201,444),cell(1,282,444),cell(1,363,444),cell(1,444,444),cell(1,525,444),cell(1,120,525),cell(1,201,525),cell(1,282,525),cell(1,363,525),cell(1,444,525),cell(1,525,525)]
 		
 		self.mole = mole()
-		
-		self.clickCount = 0
 		
 		while 1:
 			pygame.mouse.set_cursor(cursorsize,(12,12),*mousecursor)
