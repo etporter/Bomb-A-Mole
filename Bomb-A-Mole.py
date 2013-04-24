@@ -104,6 +104,9 @@ class cell:
 		self.cabbage = pygame.image.load('cabbage.png')
 		self.bomb = pygame.image.load('bomb.png')
 		self.crater = pygame.image.load('crater.png')
+		
+		self.mole = pygame.image.load('mole.png')
+		self.booming = pygame.image.load('boom.png')
 	
 		self.kind = type
 		
@@ -147,15 +150,22 @@ class cell:
 	def boom(self,count):
 		self.bombTicker = count
 		if self.bombTicker == 3:
+			self.image = self.booming
+			time.sleep(2)
 			self.kind = 4
-			self.image = self.crater
+			if self.kind == 4:
+# 				time.sleep(2)
+				self.image = self.crater
 			
 	def eaten(self,count):
 		self.moleTicker = count
 		if self.moleTicker == 3:
+			self.image = self.mole
 			print 'Veggie eaten!'
 			self.kind = 4
-			self.image = self.crater
+			if self.kind == 4:
+# 				time.sleep(2)
+				self.image = self.crater
 
 
 # Basic Game Logic:
@@ -272,6 +282,10 @@ class game:
 		self.screen = pygame.display.set_mode(self.size)
 		self.cells = [cell(random.randint(1,2),120,120),cell(random.randint(1,2),201,120),cell(random.randint(1,2),282,120),cell(random.randint(1,2),363,120),cell(random.randint(1,2),444,120),cell(random.randint(1,2),525,120),cell(random.randint(1,2),120,201),cell(random.randint(1,2),201,201),cell(random.randint(1,2),282,201),cell(random.randint(1,2),363,201),cell(random.randint(1,2),444,201),cell(random.randint(1,2),525,201),cell(random.randint(1,2),120,282),cell(random.randint(1,2),201,282),cell(random.randint(1,2),282,282),cell(random.randint(1,2),363,282),cell(random.randint(1,2),444,282),cell(random.randint(1,2),525,282),cell(random.randint(1,2),120,363),cell(random.randint(1,2),201,363),cell(random.randint(1,2),282,363),cell(random.randint(1,2),363,363),cell(random.randint(1,2),444,363),cell(random.randint(1,2),525,363),cell(random.randint(1,2),120,444),cell(random.randint(1,2),201,444),cell(random.randint(1,2),282,444),cell(random.randint(1,2),363,444),cell(random.randint(1,2),444,444),cell(random.randint(1,2),525,444),cell(random.randint(1,2),120,525),cell(random.randint(1,2),201,525),cell(random.randint(1,2),282,525),cell(random.randint(1,2),363,525),cell(random.randint(1,2),444,525),cell(random.randint(1,2),525,525)]
 		
+		self.garden = pygame.image.load('garden.png')
+		
+		self.gardenDisp = self.garden.get_rect(center = (323,323))
+		
 		self.mole = mole()
 		
 		while 1:
@@ -308,7 +322,7 @@ class game:
 					sys.exit()
 			for i in self.cells:
 				self.screen.blit(i.image,i.disp)
-				pygame.display.flip()
+# 				pygame.display.flip()
 				
 				if self.mole.x == i.x and self.mole.y == i.y:
 					self.moleSquare = i.kind
@@ -324,6 +338,7 @@ class game:
 			
 			self.screen.blit(self.moleCell.image,self.moleCell.disp)
 			pygame.display.flip()
+			self.screen.blit(self.garden,self.gardenDisp)
 
 game = game()
 
