@@ -270,7 +270,7 @@ class game:
 		
 		self.mole = mole()
 		
-		self.clickCount = 0
+		self.clickCount = 3
 		
 		while 1:
 			pygame.mouse.set_cursor(cursorsize,(12,12),*mousecursor)
