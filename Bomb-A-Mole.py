@@ -100,10 +100,18 @@ cursorsize = [24,24]
 class cell:
 	def __init__(self,type,xCoord,yCoord):
 		
-		self.carrot = pygame.image.load('carrot.png')
-		self.cabbage = pygame.image.load('cabbage.png')
-		self.bomb = pygame.image.load('bomb.png')
-		self.crater = pygame.image.load('crater.png')
+# 		self.carrot = pygame.image.load('carrot.png')
+# 		self.cabbage = pygame.image.load('cabbage.png')
+# 		self.bomb = pygame.image.load('bomb.png')
+# 		self.crater = pygame.image.load('crater.png')
+
+		self.carrot = pygame.image.load('carrot_final.png')
+		self.cabbage = pygame.image.load('cabbage_final.png')
+		self.crater = pygame.image.load('crater_final.png')
+		
+		self.bomb = pygame.image.load('bombfusefull_final.png')
+		self.bomb2 = pygame.image.load('bombfusehalf_final.png')
+		self.bomb3 = pygame.image.load('bombfuseshort.png')
 		
 		self.mole = pygame.image.load('mole.png')
 		self.booming = pygame.image.load('boom.png')
@@ -149,9 +157,16 @@ class cell:
 	
 	def boom(self,count):
 		self.bombTicker = count
-		if self.bombTicker == 3:
-			self.image = self.booming
-			time.sleep(2)
+		
+		if self.bombTicker == 1:
+			self.image = self.bomb2
+		
+		elif self.bombTicker == 2:
+			self.image = self.bomb3
+		
+		elif self.bombTicker == 3:
+# 			self.image = self.booming
+# 			time.sleep(2)
 			self.kind = 4
 			if self.kind == 4:
 # 				time.sleep(2)
