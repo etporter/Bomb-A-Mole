@@ -238,6 +238,8 @@ class mole:
 			self.iIndex = self.squareCenters.index(i)
 			if abs(self.iIndex-self.locationIndex) == 1 and abs(i[0]-self.position[0]) > 82:
 				self.moveChoices.remove(i)
+			elif abs(self.iIndex-self.locationIndex) > 7:
+				self.moveChoices.remove(i)
 		
 		self.moveChoicesIndex = []
 		
