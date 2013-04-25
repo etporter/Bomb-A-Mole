@@ -254,7 +254,7 @@ class mole:
 class game:
 	def __init__(self):
 	
-		global veggieTotal
+		global veggieTotal, playerScore
 	
 		self.size = 1200, 650
 		self.screen = pygame.display.set_mode(self.size)
@@ -306,6 +306,7 @@ class game:
 					self.moleSquare = i.kind
 					if i.kind == 3:
 						print 'Mole killed!'
+						playerScore += veggieTotal*5
 						cell.boom(i,3)
 						del self.mole
 						self.mole = mole()
@@ -320,7 +321,9 @@ class game:
 			
 			if veggieTotal == 0:
 				print 'Game over'
+				print 'Score:', playerScore
 # 				del self
+				break
 
 game = game()
 
