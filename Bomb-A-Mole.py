@@ -94,6 +94,8 @@ class cell:
 # 		self.mouseX = self.mouseLoc[0]
 # 		self.mouseY = self.mouseLoc[1]
 		
+		global veggieTotal
+		
 		self.mouseX = mouseX
 		self.mouseY = mouseY
 
@@ -107,10 +109,9 @@ class cell:
 			self.bombTicker = 0
 			self.kind = 3
 			self.image = self.bomb
+			veggieTotal -= 1
 	
 	def boom(self,count):
-	
-		global veggieTotal
 		
 		self.bombTicker = count
 		
@@ -127,8 +128,6 @@ class cell:
 			if self.kind == 4:
 # 				time.sleep(2)
 				self.image = self.crater
-			
-				veggieTotal -= 1
 			
 	def eaten(self,count):
 		self.moleTicker = count
@@ -191,10 +190,10 @@ class mole:
 		self.x = self.position[0]
 		self.y = self.position[1]
 		
-		print self.x,self.y
-		print ''
-		print self.locationIndex
-		print ''
+# 		print self.x,self.y
+# 		print ''
+# 		print self.locationIndex
+# 		print ''
 		
 	def move(self):
 # 		self.moveChoices = self.squareCenters[self.moveChoicesIndex]
@@ -204,22 +203,26 @@ class mole:
 		try:
 			self.moveChoices.append(self.squareCenters[int(self.locationIndex+1)])
 		except IndexError:
-			print 'This is out of range, no biggie'
+# 			print 'This is out of range, no biggie'
+			pass
 			
 		try:
 			self.moveChoices.append(self.squareCenters[int(self.locationIndex-1)])
 		except IndexError:
-			print 'This is out of range, no biggie'
+# 			print 'This is out of range, no biggie'
+			pass
 			
 		try:
 			self.moveChoices.append(self.squareCenters[int(self.locationIndex+6)])
 		except IndexError:
-			print 'This is out of range, no biggie'
+# 			print 'This is out of range, no biggie'
+			pass
 			
 		try:
 			self.moveChoices.append(self.squareCenters[int(self.locationIndex-6)])
 		except IndexError:
-			print 'This is out of range, no biggie'
+# 			print 'This is out of range, no biggie'
+			pass
 		
 		for i in self.moveChoices:
 			self.iIndex = self.squareCenters.index(i)
@@ -234,10 +237,10 @@ class mole:
 			k = self.squareCenters.index(j)
 			self.moveChoicesIndex.append(k)
 			
-		print self.moveChoices
-		print ''
-		print self.moveChoicesIndex
-		print ''
+# 		print self.moveChoices
+# 		print ''
+# 		print self.moveChoicesIndex
+# 		print ''
 	
 		self.position = random.choice(self.moveChoices)
 		
@@ -246,8 +249,8 @@ class mole:
 		
 		self.locationIndex = self.squareCenters.index(self.position)
 		
-		print 'New coordinates:',self.x,self.y
-		print 'New index:',self.locationIndex
+# 		print 'New coordinates:',self.x,self.y
+# 		print 'New index:',self.locationIndex
 		
 		self.locationIndex = self.squareCenters.index(self.position)
 			
@@ -323,6 +326,7 @@ class game:
 				print 'Game over'
 				print 'Score:', playerScore
 # 				del self
+				pygame.time.wait(500)
 				break
 
 game = game()
