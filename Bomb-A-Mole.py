@@ -7,9 +7,10 @@ import math
 
 pygame.init()
 
-global veggieTotal
+global veggieTotal, playerScore
 
 veggieTotal = 36
+playerScore = 0
 
 # main menu
 
@@ -252,6 +253,9 @@ class mole:
 			
 class game:
 	def __init__(self):
+	
+		global veggieTotal
+	
 		self.size = 1200, 650
 		self.screen = pygame.display.set_mode(self.size)
 		self.cells = [cell(random.randint(1,2),120,120),cell(random.randint(1,2),201,120),cell(random.randint(1,2),282,120),cell(random.randint(1,2),363,120),cell(random.randint(1,2),444,120),cell(random.randint(1,2),525,120),cell(random.randint(1,2),120,201),cell(random.randint(1,2),201,201),cell(random.randint(1,2),282,201),cell(random.randint(1,2),363,201),cell(random.randint(1,2),444,201),cell(random.randint(1,2),525,201),cell(random.randint(1,2),120,282),cell(random.randint(1,2),201,282),cell(random.randint(1,2),282,282),cell(random.randint(1,2),363,282),cell(random.randint(1,2),444,282),cell(random.randint(1,2),525,282),cell(random.randint(1,2),120,363),cell(random.randint(1,2),201,363),cell(random.randint(1,2),282,363),cell(random.randint(1,2),363,363),cell(random.randint(1,2),444,363),cell(random.randint(1,2),525,363),cell(random.randint(1,2),120,444),cell(random.randint(1,2),201,444),cell(random.randint(1,2),282,444),cell(random.randint(1,2),363,444),cell(random.randint(1,2),444,444),cell(random.randint(1,2),525,444),cell(random.randint(1,2),120,525),cell(random.randint(1,2),201,525),cell(random.randint(1,2),282,525),cell(random.randint(1,2),363,525),cell(random.randint(1,2),444,525),cell(random.randint(1,2),525,525)]
@@ -313,8 +317,6 @@ class game:
 			self.screen.blit(self.moleCell.image,self.moleCell.disp)
 			pygame.display.flip()
 			self.screen.blit(self.garden,self.gardenDisp)
-			
-			global veggieTotal
 			
 			if veggieTotal == 0:
 				print 'Game over'
