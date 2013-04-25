@@ -88,7 +88,7 @@ class cell:
 		self.disp = self.image.get_rect(center = (self.x,self.y))
 		
 	def placeBomb(self,mouseX,mouseY):
-# 		print 'placeBomb activated!'
+# 		print 'Bomb placed!'
 # 		if playerTurn = True:
 # 		self.mouseLoc = pygame.mouse.get_pos()
 # 		self.mouseX = self.mouseLoc[0]
@@ -105,11 +105,17 @@ class cell:
 
 # 			print 'placeBomb if sequence activated!'
 # 			print self.mouseX, self.mouseY
+
+			print 'Bomb placed!'
 	
 			self.bombTicker = 0
+			
+			if self.kind == 1 or self.kind == 2:
+				veggieTotal -= 1
 			self.kind = 3
 			self.image = self.bomb
-			veggieTotal -= 1
+			
+			print 'Veggies:', veggieTotal
 	
 	def boom(self,count):
 		
@@ -138,6 +144,8 @@ class cell:
 			global veggieTotal
 			
 			veggieTotal -= 1
+			
+			print 'Veggies:', veggieTotal
 			
 			self.kind = 4
 			if self.kind == 4:
@@ -301,6 +309,7 @@ class game:
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					sys.exit()
+				
 			for i in self.cells:
 				self.screen.blit(i.image,i.disp)
 # 				pygame.display.flip()
@@ -309,7 +318,7 @@ class game:
 					self.moleSquare = i.kind
 					if i.kind == 3:
 						print 'Mole killed!'
-						playerScore += veggieTotal*5
+						playerScore += 20+(veggieTotal*5)
 						cell.boom(i,3)
 						del self.mole
 						self.mole = mole()
