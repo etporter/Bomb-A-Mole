@@ -7,63 +7,15 @@ import math
 
 pygame.init()
 
+global veggieTotal
+
+veggieTotal = 36
+
 # main menu
 
 # startButton = button(command = gameloop)
 # highscoreButton = button(command = displayhighscore)
 # quitButton = button(command = quit)
-
-# thickarrow_strings = (               #sized 24x24
-# "XXXXXXXXXXXXXXXX        ",
-# "X........XXXX           ",
-# "X.....XXXX              ",
-# "X...XXX                 ",
-# "X..XXX                  ",
-# "X..XXX                  ",
-# "X.XX  X                 ",
-# "X.X    XX               ",
-# "X.X    XXX              ",
-# "XXX     X.X             ",
-# "XX       X.X            ",
-# "XX        X.XX          ",
-# "XX        XX.XX         ",
-# "X          XX.XXX       ",
-# "X           XX.XXX      ",
-# "X            XX..XXX    ",
-# "             XX....XXX  ",
-# "              XX.....XX ",
-# "               X......XX",
-# "               XX......X",
-# "                X......X",
-# "                XX.....X",
-# "                 XX...XX",
-# "                  XXXXX ")
-
-# thickarrow_strings = (               #sized 24x24
-# "        X.X.X.X.        ",
-# "     X.X.X.X.X.X.X.     ",
-# "    X.X    .X    .X.    ",
-# "   .X      X.      .X   ",
-# "  X.       .X       X.  ",
-# " .X        X.        .X ",
-# " X.        .X        X. ",
-# " X         X.         X ",
-# "X.         .X         X.",
-# ".X         X.         .X",
-# "X.         .X         X.",
-# ".X.X.X.X.X.X.X.X.X.X.X.X",
-# "X.X.X.X.X.X.X.X.X.X.X.X.",
-# ".X         X.         .X",
-# "X.         .X         X.",
-# ".X         X.         .X",
-# " X         .X         X ",
-# " X.        X.        .X ",
-# " .X        .X        X. ",
-# "  X.       X.       .X  ",
-# "   .X      .X      XX   ",
-# "    X.X    X.    X.X    ",
-# "     X.X.XX.X.X.X.X     ",
-# "        X.XX.XXX        ")
 
 thickarrow_strings = (               #sized 24x24
 "       XXXXXXXXXX       ",
@@ -156,6 +108,9 @@ class cell:
 			self.image = self.bomb
 	
 	def boom(self,count):
+	
+		global veggieTotal
+		
 		self.bombTicker = count
 		
 		if self.bombTicker == 1:
@@ -172,11 +127,18 @@ class cell:
 # 				time.sleep(2)
 				self.image = self.crater
 			
+				veggieTotal -= 1
+			
 	def eaten(self,count):
 		self.moleTicker = count
 		if self.moleTicker == 3:
 			self.image = self.mole
 			print 'Veggie eaten!'
+			
+			global veggieTotal
+			
+			veggieTotal -= 1
+			
 			self.kind = 4
 			if self.kind == 4:
 # 				time.sleep(2)
@@ -193,9 +155,7 @@ class cell:
 # 	Set Score = 0;
 # 
 # 	if user hits mole:
-# 		Kill Mole
 # 		Add score
-# 		New Mole
 # 	elif: 
 # 		Loop
 # 		Add score
@@ -203,7 +163,6 @@ class cell:
 # 	if all cell.types == 4 remain:
 # 		Level lost
 # 		save score
-# 		save lvl
 # 
 # Level Lost:
 # 		Get user name
@@ -354,6 +313,12 @@ class game:
 			self.screen.blit(self.moleCell.image,self.moleCell.disp)
 			pygame.display.flip()
 			self.screen.blit(self.garden,self.gardenDisp)
+			
+			global veggieTotal
+			
+			if veggieTotal == 0:
+				print 'Game over'
+# 				del self
 
 game = game()
 
