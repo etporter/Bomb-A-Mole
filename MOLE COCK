@@ -1,0 +1,167 @@
+import pygame, sys
+
+# I made this shit a class I think but you gotta tell me if I did it wrong. I decided upon making my own clock, one that did a countdown bar like you asked for I think? But tell me if you want to chang anything
+class MoleClock:
+    # this is just getting intilization in our shit so it wont break before we use it.
+    def __init__(self):
+        self.frame_duration = 0.000
+        self.this_frame_time = 0
+        self.last_frame_time = 0
+        return
+    
+    def tick(self):
+        #this is the "tick" so every frame it internally ticks n shit wouldnt change this part because its the framework of the tick, not the part can edit
+        "Call this every frame"
+        self.this_frame_time = self.get_current_time()
+        self.frame_duration = (self.this_frame_time - self.last_frame_time) / 1000.000
+        self.last_frame_time = self.this_frame_time
+        return
+
+    def get_frame_duration(self):
+        # Need this to find the duration of previouis frame to generate next frame knowwhatIm Sayian
+        "Returns the length of the previous frame, in seconds"
+        return self.frame_duration
+
+    def get_current_time(self):
+        # This is cuz in mS its more accurate than in peasently seconds
+        "Used internally. Returns current time in ms."
+        return pygame.time.get_ticks()
+
+    def begin(self):
+        #important to start da shit but also can change if we changing the block
+        "Starts/restarts the timer. Call just before your main loop."
+        self.last_frame_time = self.get_current_time()
+        return
+        
+if __name__ == "__main__":
+
+    pygame.init()
+
+    timer = MoleClock()
+
+    timer.begin()
+
+    # Object setup for the movement example cuz i like to move it move it you know? da 200 is da legth of the program n shit, and 20 is da hieght. Same height as da square so it dont look retarded.
+    
+    display = pygame.display.set_mode((200, 20), pygame.SWSURFACE)
+
+    # I made it red cuz red is important and people look at red and go OSHIT
+    red_square = pygame.Surface((20, 20), pygame.SWSURFACE)
+    red_square.fill((255, 0, 0))
+
+    # I made the background black cuz I tried white and it just looked like it was missing something idk
+    black_square = pygame.Surface((20, 20), pygame.SWSURFACE)
+    black_square.fill((0, 0, 0))
+
+    # This is how fast box moves. Since game is 200 lengths wide and speed of 200 its every 1 second at this moment. You can change this with simple division but I wanted to make it small to fit in the side of the HUD in our game.
+    square_speed = 200
+    square_x = 0
+
+    # Setup for interval delay and frequency. So the 1.00 means the internal time the clock takes to "tick" in our mole game we want to to be constent so i want to keep this at 1.000
+    
+    tick_interval = 1.000
+    tick_time = 0
+
+    # These are framerates. So 900 means box is updated every .9 seconds. Use a value like 5 if you want it to look like it moves consistently, and obviously higher is more choppy
+    
+    delay_duration = 5
+    
+    while 1:
+        # Interval example
+        
+        tick_time += timer.get_frame_duration()
+        if tick_time > tick_interval:
+            tick_time = 0
+
+        # Motion example
+            
+        display.blit(black_square, (square_x, 0))
+        square_x += (square_speed * timer.get_frame_duration())
+        if square_x > 320:
+            square_x = 0
+        display.blit(red_square, (square_x, 0))
+        
+        pygame.display.update()
+
+        # Insert artificial delay
+        
+        pygame.time.delay(delay_duration)
+
+        # Must call this every frame
+        
+        timer.tick()
+
+
+
+
+
+("Stopwatch -- stopwatch.watch.tk")
+
+    # get highest font size that fits resolution width
+    font_size = int(resolution[1] / 1.2)
+    font_size_fits = False
+    max_string_length = resolution[0] / 8 * 7
+
+    while not font_size_fits:
+        font = pygame.font.Font(font_path, font_size)
+        font_rect = font.size("00:00:00,00")
+        if font_rect[0] > max_string_length:
+            font_size = font_size - 10
+        else:
+            font_size_fits = True
+
+    # get the point to draw the font in the midle of the screen
+    font_blit_point = resolution[0] / 16, resolution[1] / 2 - font_rect[1] / 2
+
+
+    on = False #wheter the stopwatch is running or not
+    a = 0 # milliseconds from start
+    start_tick = 0 # the number of ticks when we began counting
+
+    while True:
+        event = pygame.event.poll()
+
+        if event.type == KEYUP:
+            if event.key == K_ESCAPE:
+                break
+
+            if event.key == K_SPACE:
+                if not on:
+                    # starting the timer, so set the tick count reference to the current tick count
+                    # plus the last tick count
+                    start_tick = pygame.time.get_ticks() - a
+
+                # swap value
+                on = not on
+
+            elif event.key == K_r:
+                # initialize the tick count
+                a = 0
+                on = False
+
+            elif event.key == K_f:
+                # swap video mode widowed, fullscreen
+                fullscreen = not fullscreen
+                video_flags = (fullscreen and FULLSCREEN) | (not fullscreen and RESIZABLE)
+                pygame.display.set_mode(resolution, video_flags)
+
+        if on:
+            # get the amount of ticks(milliseconds) that passed from the start
+            a = (pygame.time.get_ticks() - start_tick)
+
+        # render the time, by converting ticks to datetime.time + hundredth of a second
+        t = time((a / 1000) / 3600, ((a / 1000) / 60 % 60), (a / 1000) % 60)
+        h_o_s = str(a)[-3:][:2] # hundredth of a second
+        t_string = ','.join((t.strftime("%H:%M:%S"), h_o_s))
+        tempsurface = font.render(t_string, 1, THECOLORS["black"])
+
+        surface.fill(THECOLORS["white"]) #fill the screen with white, to erase the previous time
+        surface.blit(tempsurface, font_blit_point) # draw the time
+
+        pygame.display.flip()
+        pygame.time.wait(100)
+
+
+if __name__ == '__main__':
+    main()
+
