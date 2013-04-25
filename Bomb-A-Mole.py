@@ -307,6 +307,8 @@ class game:
 					mole.move(self.mole)
 						
 				if event.type == pygame.QUIT:
+					print 'Game over'
+					print 'Score:', playerScore
 					pygame.quit()
 					sys.exit()
 				
