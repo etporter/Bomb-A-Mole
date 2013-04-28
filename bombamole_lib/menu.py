@@ -144,7 +144,7 @@ class run(object):
         from os.path import dirname,join
        
         here = dirname(__file__)
-        scr = display.set_mode((1200,600))
+        scr = display.set_mode((1200,650))
         print(menu.__doc__)
         f = font.Font(join('data/FEASFBRG.ttf'),45)
         f1 = font.Font(join('data/FEASFBRG.ttf'),25)
