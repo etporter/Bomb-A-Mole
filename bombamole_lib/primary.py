@@ -15,6 +15,8 @@ playerScore = 0
 # highscoreButton = button(command = displayhighscore)
 # quitButton = button(command = quit)
 
+# this creates the image for the cursor as ascii art:
+
 thickarrow_strings = (               #sized 24x24
 "       XXXXXXXXXX       ",
 "     XX..........XX     ",
@@ -41,19 +43,22 @@ thickarrow_strings = (               #sized 24x24
 "     XX..........XX     ",
 "       XXXXXXXXXX       ")
 
+# compiles the cursor from ascii art:
+
 mousecursor = pygame.cursors.compile(thickarrow_strings, black='X', white='.', xor='o')
+
+# defines cursor size:
 
 cursorsize = [24,24]
 
 # objects/classes:
 
+# Object to create grid from:
+
 class cell:
 	def __init__(self,type,xCoord,yCoord):
-		
-# 		self.carrot = pygame.image.load('carrot.png')
-# 		self.cabbage = pygame.image.load('cabbage.png')
-# 		self.bomb = pygame.image.load('bomb.png')
-# 		self.crater = pygame.image.load('crater.png')
+
+# Load in the images:
 
 		self.carrot = pygame.image.load('carrot_final.png')
 		self.cabbage = pygame.image.load('cabbage_final.png')
@@ -65,13 +70,19 @@ class cell:
 		
 		self.mole = pygame.image.load('mole.png')
 		self.booming = pygame.image.load('boom.png')
-	
+
+# pass in the arguments:
+
 		self.kind = type
 		
 		self.x = xCoord
 		self.y = yCoord
 		
+# set the bomb timer variable:
+		
 		self.bombTicker = 0
+		
+# set the image bases on self.kind:
 		
 		if self.kind == 1:
 			self.image = self.carrot
@@ -82,8 +93,12 @@ class cell:
 		elif self.kind == 4:
 			self.image = self.crater
 		
-		self.disp = self.image.get_rect(center = (self.x,self.y))
+# Set up the display for self:
 		
+		self.disp = self.image.get_rect(center = (self.x,self.y))
+
+# define the bomb placing method		
+
 	def placeBomb(self,mouseX,mouseY):
 # 		print 'Bomb placed!'
 # 		if playerTurn = True:
@@ -92,6 +107,8 @@ class cell:
 # 		self.mouseY = self.mouseLoc[1]
 		
 		global veggieTotal
+		
+# Pass in the arguments:
 		
 		self.mouseX = mouseX
 		self.mouseY = mouseY
@@ -103,7 +120,7 @@ class cell:
 # 			print 'placeBomb if sequence activated!'
 # 			print self.mouseX, self.mouseY
 
-			print 'Bomb placed!'
+# 			print 'Bomb placed!'
 	
 			self.bombTicker = 0
 			
@@ -112,7 +129,7 @@ class cell:
 			self.kind = 3
 			self.image = self.bomb
 			
-			print 'Veggies:', veggieTotal
+# 			print 'Veggies:', veggieTotal
 	
 	def boom(self,count):
 		
@@ -134,15 +151,15 @@ class cell:
 			
 	def eaten(self,count):
 		self.moleTicker = count
-		if self.moleTicker == 3:
+		if self.moleTicker == 2:
 			self.image = self.mole
-			print 'Veggie eaten!'
+# 			print 'Veggie eaten!'
 			
 			global veggieTotal
 			
 			veggieTotal -= 1
 			
-			print 'Veggies:', veggieTotal
+# 			print 'Veggies:', veggieTotal
 			
 			self.kind = 4
 			if self.kind == 4:
@@ -190,20 +207,22 @@ class mole:
 		
 		self.locationIndex = self.squareCenters.index(self.position)
 		
-		game.clickCount = 3
+		game.clickCount = 2
 		
 		self.x = self.position[0]
 		self.y = self.position[1]
 		
-# 		print self.x,self.y
-# 		print ''
-# 		print self.locationIndex
-# 		print ''
+		print self.x,self.y
+		print ''
+		print self.locationIndex
+		print ''
 		
-	def move(self):
+	def move(self,inputList):
 # 		self.moveChoices = self.squareCenters[self.moveChoicesIndex]
 		
 		self.moveChoices = []
+		
+		self.cells = inputList
 		
 		try:
 			self.moveChoices.append(self.squareCenters[int(self.locationIndex+1)])
@@ -235,27 +254,90 @@ class mole:
 				self.moveChoices.remove(i)
 			elif abs(self.iIndex-self.locationIndex) > 7:
 				self.moveChoices.remove(i)
-		
+	
+		self.priority1List = []
+	
+		for i in self.moveChoices:
+
+			for j in self.cells:
+			
+				jCoordinates = (j.x,j.y)
+			
+# 				jIndex = self.squareCenters.index(jCoordinates)
+
+				if jCoordinates == i and (j.kind == 1 or j.kind == 2):
+					self.priority1List.append(i)
+					break
+	
+		self.priority2List = []
+	
+		for i in self.moveChoices:
+
+			for j in self.cells:
+			
+				jCoordinates = [j.x,j.y]
+			
+# 				jIndex = self.squareCenters.index(jCoordinates)
+
+				if jCoordinates[0] == i[0] and (j.kind == 1 or j.kind == 2):
+					self.priority2List.append(i)
+					break
+				elif jCoordinates[1] == i[1] and (j.kind == 1 or j.kind ==2):
+					self.priority2List.append(i)
+					break
+
 		self.moveChoicesIndex = []
 		
 		for j in self.moveChoices:
 			k = self.squareCenters.index(j)
 			self.moveChoicesIndex.append(k)
 			
-# 		print self.moveChoices
+# 		print 'C' self.moveChoices
 # 		print ''
-# 		print self.moveChoicesIndex
-# 		print ''
-	
-		self.position = random.choice(self.moveChoices)
+		print 'Choices:',self.moveChoicesIndex
+		print ''
+
+		self.priority1MoveChoicesIndex = []
 		
-		self.x = self.position[0]
-		self.y = self.position[1]
+		for j in self.priority1List:
+			k = self.squareCenters.index(j)
+			self.priority1MoveChoicesIndex.append(k)
+		
+		print 'Priority 1 Choices:',self.priority1MoveChoicesIndex
+		print ''
+		
+		self.priority2MoveChoicesIndex = []
+		
+		for j in self.priority2List:
+			k = self.squareCenters.index(j)
+			self.priority2MoveChoicesIndex.append(k)
+		
+		print 'Priority 2 Choices:',self.priority2MoveChoicesIndex
+		print ''
+
+		try:
+			self.position = random.choice(self.priority1List)
+		
+			self.x = self.position[0]
+			self.y = self.position[1]
+		
+		except:
+			try:
+				self.position = random.choice(self.priority2List)
+		
+				self.x = self.position[0]
+				self.y = self.position[1]
+			
+			except:
+				self.position = random.choice(self.moveChoices)
+		
+				self.x = self.position[0]
+				self.y = self.position[1]
 		
 		self.locationIndex = self.squareCenters.index(self.position)
 		
-# 		print 'New coordinates:',self.x,self.y
-# 		print 'New index:',self.locationIndex
+		print 'New coordinates:',self.x,self.y
+		print 'New index:',self.locationIndex
 		
 		self.locationIndex = self.squareCenters.index(self.position)
 			
@@ -286,7 +368,7 @@ class game:
 					self.mY = self.mouseLoc[1]
 # 					print self.mX,self.mY
 
-					if self.clickCount < 3:
+					if self.clickCount < 2:
 						self.clickCount += 1
 					else:
 						self.clickCount = 0
@@ -301,7 +383,7 @@ class game:
 						if i.kind == 3:
 							cell.boom(i,i.bombTicker)
 					
-					mole.move(self.mole)
+					mole.move(self.mole,self.cells)
 						
 				if event.type == pygame.QUIT:
 					print 'Game over'
