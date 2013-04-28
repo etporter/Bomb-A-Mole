@@ -1,9 +1,6 @@
-import sys
-import pygame
 from pygame.locals import *
-import random
-import time
-import math
+import time,math,random,pygame,sys
+import menu
 
 pygame.init()
 
@@ -340,5 +337,7 @@ class game:
 				pygame.time.wait(500)
 				break
 
-game = game()
+if __name__ == "__main__" :
+        play = game()
+        play.run()
 

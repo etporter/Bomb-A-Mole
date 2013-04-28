@@ -5,8 +5,7 @@ font.init()
 from math import cos,radians
 import primary
 
-
-
+        
 def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=None,interline=5,justify=True,light=5,speed=300,lag=30):
    
 
@@ -138,7 +137,7 @@ def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=Non
     return ret
 class run(object):
     #if __name__ == '__main__':
-    
+
     def runm(self):
         
         time.Clock()
@@ -147,13 +146,13 @@ class run(object):
         here = dirname(__file__)
         scr = display.set_mode((1100,550))
         print(menu.__doc__)
-        f = font.Font(join('FEASFBRG.ttf'),45)
-        f1 = font.Font(join('FEASFBRG.ttf'),25)
-        f2 = font.Font(join('FEASFBRG.ttf'),15)
+        f = font.Font(join('data/FEASFBRG.ttf'),45)
+        f1 = font.Font(join('data/FEASFBRG.ttf'),25)
+        f2 = font.Font(join('data/FEASFBRG.ttf'),15)
         mainmenu = f.render('Bomb A Mole!',1,(255,255,255))
         r = mainmenu.get_rect()
         r.centerx,r.top = 550,120
-        background_main = image.load('bomb-a-mole_screenbackground.png').convert()
+        background_main = image.load('data/bomb-a-mole_screenbackground.png').convert()
         scr.blit(background_main,(0,0))
         bg = scr.copy()
         scr.blit(mainmenu,r)
@@ -173,9 +172,11 @@ class run(object):
         
         if resp == 'PLAY':
             display.update(scr.blit(bg,r,r))
-            display.update(scr.blit(f.render('PLAY',1,(255,255,255)),(255,120)))
-            primary.run()
-            
+            moleGame = primary.game()
+            moleGame.run()
+
+      #  if resp == 'INSTRUCTIONS':
+      #  if resp == 'HIGHSCORES':
        
             
         
