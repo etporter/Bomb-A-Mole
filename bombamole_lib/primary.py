@@ -15,9 +15,7 @@ playerScore = 0
 # highscoreButton = button(command = displayhighscore)
 # quitButton = button(command = quit)
 
-# This is the image for the cursor:
-
-thickarrow_strings = (
+thickarrow_strings = (               #sized 24x24
 "       XXXXXXXXXX       ",
 "     XX..........XX     ",
 "    X..XXXX..XXXX..X    ",
@@ -65,7 +63,7 @@ class cell:
 		self.bomb2 = pygame.image.load('bombfusehalf_final.png')
 		self.bomb3 = pygame.image.load('bombfuseshort.png')
 		
-		self.mole = pygame.image.load('mole_final.png')
+		self.mole = pygame.image.load('mole.png')
 		self.booming = pygame.image.load('boom.png')
 	
 		self.kind = type
