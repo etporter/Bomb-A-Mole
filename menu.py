@@ -145,14 +145,14 @@ class run(object):
         from os.path import dirname,join
        
         here = dirname(__file__)
-        scr = display.set_mode((600,560))
+        scr = display.set_mode((1100,550))
         print(menu.__doc__)
         f = font.Font(join('FEASFBRG.ttf'),45)
         f1 = font.Font(join('FEASFBRG.ttf'),25)
         f2 = font.Font(join('FEASFBRG.ttf'),15)
         mainmenu = f.render('Bomb A Mole!',1,(255,255,255))
         r = mainmenu.get_rect()
-        r.centerx,r.top = 300,120
+        r.centerx,r.top = 550,120
         background_main = image.load('bomb-a-mole_screenbackground.png').convert()
         scr.blit(background_main,(0,0))
         bg = scr.copy()
@@ -161,8 +161,8 @@ class run(object):
         
         menu1 = {"menu":['PLAY','HIGHSCORES','INSTRUCTIONS','EXIT'],"font1":f1,"pos":'center',"color1":(154,180,61),"light":6,"speed":200,"lag":20}
 
-        menus = (menu1,menu2,menu4,menu5)
-        playlist = [menu1,menu2,menu4,menu5]
+        menus = (menu1)
+        playlist = [menu1]
         
         resp = "re-show"
         while resp == "re-show":
@@ -174,7 +174,8 @@ class run(object):
         if resp == 'PLAY':
             display.update(scr.blit(bg,r,r))
             display.update(scr.blit(f.render('PLAY',1,(255,255,255)),(255,120)))
-            resp = menu(**menu2)[0]
+            primary.run()
+            
        
             
         
