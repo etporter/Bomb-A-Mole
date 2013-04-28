@@ -6,7 +6,7 @@ from math import cos,radians
 import primary
 
         
-def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=None,interline=5,justify=True,light=5,speed=300,lag=30):
+def menu(menu,pos='right',font1=None,font2=None,color1=(128,128,128),color2=None,interline=5,justify=True,light=5,speed=300,lag=30):
    
 
     class Item(Rect):
@@ -144,7 +144,7 @@ class run(object):
         from os.path import dirname,join
        
         here = dirname(__file__)
-        scr = display.set_mode((1100,550))
+        scr = display.set_mode((1200,600))
         print(menu.__doc__)
         f = font.Font(join('data/FEASFBRG.ttf'),45)
         f1 = font.Font(join('data/FEASFBRG.ttf'),25)
