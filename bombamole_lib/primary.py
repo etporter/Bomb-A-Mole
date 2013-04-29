@@ -9,12 +9,6 @@ global veggieTotal, playerScore
 veggieTotal = 36
 playerScore = 0
 
-# main menu
-
-# startButton = button(command = gameloop)
-# highscoreButton = button(command = displayhighscore)
-# quitButton = button(command = quit)
-
 # this creates the image for the cursor as ascii art:
 
 thickarrow_strings = (               #sized 24x24
@@ -115,6 +109,8 @@ class cell:
 
 # 		print self.mouseX, self.mouseY
 		
+# 		check to see if the user clicked inside the cell
+		
 		if abs(self.x - self.mouseX) <= 40 and abs(self.y - self.mouseY) <= 40:
 
 # 			print 'placeBomb if sequence activated!'
@@ -122,7 +118,12 @@ class cell:
 
 # 			print 'Bomb placed!'
 	
+# 	set the cell's bomb ticker to 0
+	
 			self.bombTicker = 0
+			
+# 	change the cell to a bomb, both in type and display
+# 	lower the vegetable count by one if the cell is a vegetable.
 			
 			if self.kind == 1 or self.kind == 2:
 				veggieTotal -= 1
@@ -131,15 +132,23 @@ class cell:
 			
 # 			print 'Veggies:', veggieTotal
 	
+# 	define a method for the bomb exploding:
+	
 	def boom(self,count):
 		
+# 		pass in the bomb count
+		
 		self.bombTicker = count
+		
+# 		the image changes as the bomb counts down:
 		
 		if self.bombTicker == 1:
 			self.image = self.bomb2
 		
 		elif self.bombTicker == 2:
 			self.image = self.bomb3
+		
+# 		at 3, the bomb explodes
 		
 		elif self.bombTicker == 3:
 # 			self.image = self.booming
@@ -149,7 +158,13 @@ class cell:
 # 				time.sleep(2)
 				self.image = self.crater
 			
+# 			Method for the vegetable being eaten:
+# 			(I found it was easier to have the cell decide if it's been eaten, than have the mole decide)
+			
 	def eaten(self,count):
+	
+# 	the mole eats every other turn
+	
 		self.moleTicker = count
 		if self.moleTicker == 2:
 			self.image = self.mole
@@ -169,23 +184,6 @@ class cell:
 
 # Basic Game Logic:
 
-# def gameloop:
-# 
-# # Enter Game Loop:
-# 	
-# 	Game build == 1;
-# 	Set Score = 0;
-# 
-# 	if user hits mole:
-# 		Add score
-# 	elif: 
-# 		Loop
-# 		Add score
-# 		elim clicked spaces
-# 	if all cell.types == 4 remain:
-# 		Level lost
-# 		save score
-# 
 # Level Lost:
 # 		Get user name
 # 			Save user name
@@ -200,29 +198,56 @@ class cell:
 
 # End game loop
 
+# the mole class:
+# (this class basically boils down to a tuple of two numbers, i.e. the mole's coordinates)
+
 class mole:
 	def __init__(self):
+	
+# 	create a list with the real coordinates of the centers of all the cells:
+	
 		self.squareCenters = [(120,120),(201,120),(282,120),(363,120),(444,120),(525,120),(120,201),(201,201),(282,201),(363,201),(444,201),(525,201),(120,282),(201,282),(282,282),(363,282),(444,282),(525,282),(120,363),(201,363),(282,363),(363,363),(444,363),(525,363),(120,444),(201,444),(282,444),(363,444),(444,444),(525,444),(120,525),(201,525),(282,525),(363,525),(444,525),(525,525)]
+		
+# 		the mole randomly chooses one of these pairs of coordinates
+		
 		self.position = random.choice(self.squareCenters)
+		
+# 		the mole's location can also be defined as an index inside the list of x,y pairs
 		
 		self.locationIndex = self.squareCenters.index(self.position)
 		
+# 		a silly hack to make the mole eat as soon as it's created:
+		
 		game.clickCount = 2
+		
+# 		pull x and y out of the location tuple:
 		
 		self.x = self.position[0]
 		self.y = self.position[1]
+		
+# 		for debugging:
 		
 		print self.x,self.y
 		print ''
 		print self.locationIndex
 		print ''
 		
+# 		the mole's move method:
+# 		it takes a list as an argument, so that it is aware of the cell objects inside the main game class
+		
 	def move(self,inputList):
 # 		self.moveChoices = self.squareCenters[self.moveChoicesIndex]
 		
+# 		empty list of choices for moving:
+		
 		self.moveChoices = []
 		
+# 		pass in the inputList argument:
+		
 		self.cells = inputList
+		
+# 		try to add the cell below, above, left, and right of the mole as move choices
+# 		if they aren't found in the list (index out of range), pass
 		
 		try:
 			self.moveChoices.append(self.squareCenters[int(self.locationIndex+1)])
@@ -248,12 +273,18 @@ class mole:
 # 			print 'This is out of range, no biggie'
 			pass
 		
+# 		this leads to allowing the mole to move across the screen (see the index mapping file for an illustration)
+# 		so, we remove all choices who's x or y are across the screen:
+		
 		for i in self.moveChoices:
 			self.iIndex = self.squareCenters.index(i)
 			if abs(self.iIndex-self.locationIndex) == 1 and abs(i[0]-self.position[0]) > 82:
 				self.moveChoices.remove(i)
 			elif abs(self.iIndex-self.locationIndex) > 7:
 				self.moveChoices.remove(i)
+	
+# 		create a priority 1 list from move choices
+# 		this list consists of any squares neighboring the mole that contain vegetables
 	
 		self.priority1List = []
 	
@@ -268,6 +299,9 @@ class mole:
 				if jCoordinates == i and (j.kind == 1 or j.kind == 2):
 					self.priority1List.append(i)
 					break
+	
+# 		create a priority 2 list from move choices
+# 		this list consists of any squares neighboring the mole who's row or column contain vegetables
 	
 		self.priority2List = []
 	
@@ -285,6 +319,8 @@ class mole:
 				elif jCoordinates[1] == i[1] and (j.kind == 1 or j.kind ==2):
 					self.priority2List.append(i)
 					break
+
+# 		create lists of the indexes of our three move choice lists, and print them for debugging:
 
 		self.moveChoicesIndex = []
 		
@@ -314,6 +350,10 @@ class mole:
 		
 		print 'Priority 2 Choices:',self.priority2MoveChoicesIndex
 		print ''
+
+# 		first, try to pick a move from priority 1 list, if it is empty:
+# 		second, try to pick a move from priority 2 list, if it is empty:
+# 		third, pick a move from our initial move choice list
 
 		try:
 			self.position = random.choice(self.priority1List)
@@ -346,15 +386,26 @@ class game:
 	
 		global veggieTotal, playerScore
 	
+# 	set the screen size:
+	
 		self.size = 1200, 650
 		self.screen = pygame.display.set_mode(self.size)
+		
+# 		create the grid of cells:
+		
 		self.cells = [cell(random.randint(1,2),120,120),cell(random.randint(1,2),201,120),cell(random.randint(1,2),282,120),cell(random.randint(1,2),363,120),cell(random.randint(1,2),444,120),cell(random.randint(1,2),525,120),cell(random.randint(1,2),120,201),cell(random.randint(1,2),201,201),cell(random.randint(1,2),282,201),cell(random.randint(1,2),363,201),cell(random.randint(1,2),444,201),cell(random.randint(1,2),525,201),cell(random.randint(1,2),120,282),cell(random.randint(1,2),201,282),cell(random.randint(1,2),282,282),cell(random.randint(1,2),363,282),cell(random.randint(1,2),444,282),cell(random.randint(1,2),525,282),cell(random.randint(1,2),120,363),cell(random.randint(1,2),201,363),cell(random.randint(1,2),282,363),cell(random.randint(1,2),363,363),cell(random.randint(1,2),444,363),cell(random.randint(1,2),525,363),cell(random.randint(1,2),120,444),cell(random.randint(1,2),201,444),cell(random.randint(1,2),282,444),cell(random.randint(1,2),363,444),cell(random.randint(1,2),444,444),cell(random.randint(1,2),525,444),cell(random.randint(1,2),120,525),cell(random.randint(1,2),201,525),cell(random.randint(1,2),282,525),cell(random.randint(1,2),363,525),cell(random.randint(1,2),444,525),cell(random.randint(1,2),525,525)]
+		
+# 		load in the garden background image
 		
 		self.garden = pygame.image.load('garden.png')
 		
 		self.gardenDisp = self.garden.get_rect(center = (323,323))
 		
+# 		initialize the mole object:
+		
 		self.mole = mole()
+		
+# 		primary game loop:
 		
 		while 1:
 			pygame.mouse.set_cursor(cursorsize,(12,12),*mousecursor)
