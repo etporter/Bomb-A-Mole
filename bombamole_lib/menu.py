@@ -1,10 +1,45 @@
-
+import pygame
 from pygame import *
 font.init()
 
 from math import cos,radians
 import primary
 
+# this creates the image for the cursor as ascii art:
+
+thickarrow_strings = (               #sized 24x24
+"       XXXXXXXXXX       ",
+"     XX..........XX     ",
+"    X..XXXX..XXXX..X    ",
+"   X.XX   X..X   XX.X   ",
+"  X.X     X..X     X.X  ",
+" X.X      X..X      X.X ",
+" X.X      X..X      X.X ",
+"X.X       X..X       X.X",
+"X.X       X..X       X.X",
+"X.X       X..X       X.X",
+"X.XXXXXXXXX..XXXXXXXXX.X",
+"X......................X",
+"X......................X",
+"X.XXXXXXXXX..XXXXXXXXX.X",
+"X.X       X..X       X.X",
+"X.X       X..X       X.X",
+"X.X       X..X       X.X",
+" X.X      X..X      X.X ",
+" X.X      X..X      X.X ",
+"  X.X     X..X     X.X  ",
+"   X.XX   X..X   XX.X   ",
+"    X..XXXX..XXXX..X    ",
+"     XX..........XX     ",
+"       XXXXXXXXXX       ")
+
+# compiles the cursor from ascii art:
+
+mousecursor = pygame.cursors.compile(thickarrow_strings, black='X', white='.', xor='o')
+
+# defines cursor size:
+
+cursorsize = [24,24]
         
 def menu(menu,pos='right',font1=None,font2=None,color1=(128,128,128),color2=None,interline=5,justify=True,light=5,speed=300,lag=30):
    
@@ -102,6 +137,8 @@ def menu(menu,pos='right',font1=None,font2=None,color1=(128,128,128),color2=None
     display.set_caption("Bomb A Mole!")
     
     while True:
+        
+        pygame.mouse.set_cursor(cursorsize,(12,12),*mousecursor)
         
         ev = event.wait()
         if ev.type == MOUSEMOTION:
