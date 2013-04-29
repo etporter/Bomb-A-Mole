@@ -10,7 +10,7 @@ display_instructions = True
 
 clock=pygame.time.Clock()
 
-dimensions=[1440,720]
+dimensions=[1200,650]
 
 done=False
 
