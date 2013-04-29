@@ -183,9 +183,9 @@ class run(object):
         here = dirname(__file__)
         scr = display.set_mode((1200,650))
         print(menu.__doc__)
-        f = font.Font(join('data/FEASFBRG.ttf'),45)
-        f1 = font.Font(join('data/FEASFBRG.ttf'),25)
-        f2 = font.Font(join('data/FEASFBRG.ttf'),15)
+        f = font.Font(join('data/FEASFBRG.TTF'),45)
+        f1 = font.Font(join('data/FEASFBRG.TTF'),25)
+        f2 = font.Font(join('data/FEASFBRG.TTF'),15)
         mainmenu = f.render('Bomb A Mole!',1,(255,255,255))
         r = mainmenu.get_rect()
         r.centerx,r.top = 800,120
