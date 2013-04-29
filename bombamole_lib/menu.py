@@ -151,7 +151,7 @@ class run(object):
         f2 = font.Font(join('data/FEASFBRG.ttf'),15)
         mainmenu = f.render('Bomb A Mole!',1,(255,255,255))
         r = mainmenu.get_rect()
-        r.centerx,r.top = 550,120
+        r.centerx,r.top = 800,120
         background_main = image.load('data/bomb-a-mole_screenbackground.png').convert()
         scr.blit(background_main,(0,0))
         bg = scr.copy()
