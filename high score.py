@@ -32,7 +32,7 @@ for i in text:
 	iIndex = text.index(i)
 	
 	j = font.render(i, True, [255,255,255])
-	screen.blit(j, [100, (iIndex+1)*50])
+	screen.blit(j, [50, ((iIndex+1)*50)-10])
 
 # main loop:
 while 1:
