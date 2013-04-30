@@ -1,31 +1,31 @@
+"""
+This is a program for displaying the user's high scores.
+"""
 import sys, pygame
  
- 
-pygame.init()
-  
+pygame.init() 
 
 pygame.display.set_caption('High Score')
 
+# set the window size:
 dimensions=[1200,650]
 
 font = pygame.font.Font(None, 48)
 
 screen=pygame.display.set_mode(dimensions)
 
+# load the high score storage file:
 file = open("High Score.txt", "r") 
-# line = file.readline()
-intext = file.read() 
 
-# print text
+# read the file:
+intext = file.read()
 
-# while line: 
-# 	print line 
-# 	line = file.readline()
-
+# split the high score storage into useable data
 text = str(intext).split('.')
 
 print text
 
+# For each item in the list of high scores, blit at a different y coordinate:
 for i in text:
 	print i
 
@@ -34,9 +34,7 @@ for i in text:
 	j = font.render(i, True, [255,255,255])
 	screen.blit(j, [100, (iIndex+1)*50])
 
-# text=font.render(text, True, [255,255,255])
-# screen.blit(text, [100, 200]) 
-
+# main loop:
 while 1:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
