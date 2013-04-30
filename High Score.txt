@@ -1,6 +1,1 @@
-Roland 550
-Jimmy 690
-Alex 650
-Sean 675
-Jonah 530
-Ethan 2550
+Roland 550.Jimmy 690.Alex 650.Sean 675.Jonah 530.Ethan 2550
