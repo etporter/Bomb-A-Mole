@@ -35,7 +35,7 @@ class hs(object):
 		
 		print secondText
 
-		secondText = sorted(secondText, key = lambda i: int(i[1]))
+		secondText = sorted(secondText, key = lambda i: int(i[1]), reverse = True)
 
 		if len(secondText) > 12 and len(secondText) < 24:
 			text1 = secondText[0:12]
@@ -63,7 +63,7 @@ class hs(object):
 				k = j[1:-1]
 			
 				l = font.render(str(k), True, [255,255,255])
-				screen.blit(l, [400, ((iIndex+1)*50)-10])
+				screen.blit(l, [450, ((iIndex+1)*50)-10])
 				
 		elif len(secondText) > 24:
 			text1 = secondText[0:12]
@@ -92,7 +92,7 @@ class hs(object):
 				k = j[1:-1]
 			
 				l = font.render(str(k), True, [255,255,255])
-				screen.blit(l, [400, ((iIndex+1)*50)-10])
+				screen.blit(l, [450, ((iIndex+1)*50)-10])
 				
 			for i in text3:
 		# 		print i
