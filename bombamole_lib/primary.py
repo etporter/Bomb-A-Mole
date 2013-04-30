@@ -1,6 +1,7 @@
 from pygame.locals import *
 import time,math,random,pygame,sys
 import menu
+import pyganim
 
 pygame.init()
 
@@ -64,8 +65,8 @@ class cell:
 		self.bomb2 = pygame.image.load('bombfusehalf_final.png')
 		self.bomb3 = pygame.image.load('bombfuseshort.png')
 		
-		self.mole = pygame.image.load('mole.png')
-		self.booming = pygame.image.load('boom.png')
+#		self.mole = pygame.image.load('mole_final.png')
+#		self.booming = pygame.image.load('boom.png')
 
 # pass in the arguments:
 
@@ -136,7 +137,7 @@ class cell:
 	
 # 	define a method for the bomb exploding:
 	
-	def boom(self,count):
+	def boom(self,count,x,y):
 		
 # 		pass in the bomb count
 		
@@ -153,10 +154,9 @@ class cell:
 # 		at 3, the bomb explodes
 		
 		elif self.bombTicker == 3:
-# 			self.image = self.booming
-# 			time.sleep(2)
 			self.kind = 4
 			if self.kind == 4:
+                                self.banim = banim(self.x,self.y)
 # 				time.sleep(2)
 				self.image = self.crater
 			
@@ -169,7 +169,7 @@ class cell:
 	
 		self.moleTicker = count
 		if self.moleTicker == 2:
-			self.image = self.mole
+#			self.image = self.mole
 # 			print 'Veggie eaten!'
 			
 			global veggieTotal
@@ -180,6 +180,8 @@ class cell:
 			
 			self.kind = 4
 			if self.kind == 4:
+                              #  munching = mole_animation.manim()
+                             #   munching.run()
 # 				time.sleep(2)
 				self.image = self.crater
 
@@ -382,7 +384,26 @@ class mole:
 		print 'New index:',self.locationIndex
 		
 		self.locationIndex = self.squareCenters.index(self.position)
-			
+class banim:
+        def __init__(self,mouseX,mouseY):
+            self.x = mouseX
+            self.y = mouseY
+            # create the animation objects   ('filename of image',    duration_in_seconds)
+            boomAnim = pyganim.PygAnimation([('data/kaboom_frame1.png', 0.1),
+                                             ('data/kaboom_frame2.png', 0.1),
+                                             ('data/kaboom_frame3.png', 0.1),
+                                             ('data/kaboom_frame4.png', 0.1),
+                                             ('data/kaboom_frame5.png', 0.1),
+                                             ('data/kaboom_frame6.png', 0.1),
+                                             ('data/kaboom_frame7.png', 0.1)])
+            boomAnim.play() # there is also a pause() and stop() method
+
+            mainClock = pygame.time.Clock()
+            while True:
+                boomAnim.blit(game.screen,(self.x,self.y))
+
+                pygame.display.update()
+                mainClock.tick(30) # Feel free to experiment with any FPS setting.	
 class game:
 	def __init__(self):
 	
@@ -391,7 +412,7 @@ class game:
 # 	set the screen size:
 	
 		self.size = 1200, 650
-		self.screen = pygame.display.set_mode(self.size)
+		game.screen = pygame.display.set_mode((self.size),0,32)
 		
 # 		create the grid of cells:
 		
@@ -434,7 +455,7 @@ class game:
 						i.bombTicker += 1
 						cell.placeBomb(i,self.mX,self.mY)
 						if i.kind == 3:
-							cell.boom(i,i.bombTicker)
+							cell.boom(i,i.bombTicker,i.x,i.y)
 					
 					mole.move(self.mole,self.cells)
 						
