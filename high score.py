@@ -12,11 +12,9 @@ font = pygame.font.Font(None, 48)
 
 screen=pygame.display.set_mode(dimensions)
 
-
-
 file = open("High Score.txt", "r") 
 # line = file.readline()
-text = file.read() 
+intext = file.read() 
 
 # print text
 
@@ -24,6 +22,9 @@ text = file.read()
 # 	print line 
 # 	line = file.readline()
 
+text = intext.split('.')
+
+print text
 
 text=font.render(text, True, [255,255,255])
 screen.blit(text, [100, 200]) 
