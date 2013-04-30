@@ -45,17 +45,25 @@ class hs(object):
 		# 		print i
 
 				iIndex = text1.index(i)
+				
+				j = str(i)
 			
-				j = font.render(i, True, [255,255,255])
-				screen.blit(j, [50, ((iIndex+1)*50)-10])
+				k = j[1:-1]
+			
+				l = font.render(str(k), True, [255,255,255])
+				screen.blit(l, [50, ((iIndex+1)*50)-10])
 				
 			for i in text2:
 		# 		print i
 
 				iIndex = text2.index(i)
 			
-				j = font.render(i, True, [255,255,255])
-				screen.blit(j, [400, ((iIndex+1)*50)-10])
+				j = str(i)
+			
+				k = j[1:-1]
+			
+				l = font.render(str(k), True, [255,255,255])
+				screen.blit(l, [400, ((iIndex+1)*50)-10])
 				
 		elif len(secondText) > 24:
 			text1 = secondText[0:12]
@@ -66,25 +74,37 @@ class hs(object):
 		# 		print i
 
 				iIndex = text1.index(i)
+				
+				j = str(i)
 			
-				j = font.render(str(i), True, [255,255,255])
-				screen.blit(j, [50, ((iIndex+1)*50)-10])
+				k = j[1:-1]
+			
+				l = font.render(str(k), True, [255,255,255])
+				screen.blit(l, [50, ((iIndex+1)*50)-10])
 				
 			for i in text2:
 		# 		print i
 
 				iIndex = text2.index(i)
 			
-				j = font.render(str(i), True, [255,255,255])
-				screen.blit(j, [400, ((iIndex+1)*50)-10])
+				j = str(i)
+			
+				k = j[1:-1]
+			
+				l = font.render(str(k), True, [255,255,255])
+				screen.blit(l, [400, ((iIndex+1)*50)-10])
 				
 			for i in text3:
 		# 		print i
 
 				iIndex = text3.index(i)
 			
-				j = font.render(str(i), True, [255,255,255])
-				screen.blit(j, [800, ((iIndex+1)*50)-10])
+				j = str(i)
+			
+				k = j[1:-1]
+			
+				l = font.render(str(k), True, [255,255,255])
+				screen.blit(l, [800, ((iIndex+1)*50)-10])
 
 		else:
 		# For each item in the list of high scores, blit at a different y coordinate:
@@ -93,8 +113,12 @@ class hs(object):
 
 				iIndex = secondText.index(i)
 			
-				j = font.render(i, True, [255,255,255])
-				screen.blit(j, [50, ((iIndex+1)*50)-10])
+				j = str(i)
+			
+				k = j[1:-1]
+			
+				l = font.render(str(k), True, [255,255,255])
+				screen.blit(l, [50, ((iIndex+1)*50)-10])
 
 		# main loop:
 		while 1:
