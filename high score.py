@@ -25,14 +25,35 @@ text = str(intext).split('.')
 
 print text
 
-# For each item in the list of high scores, blit at a different y coordinate:
-for i in text:
-	print i
-
-	iIndex = text.index(i)
+if len(text) > 12:
+	text1 = text[0:12]
+	text2 = text[12:]
 	
-	j = font.render(i, True, [255,255,255])
-	screen.blit(j, [50, ((iIndex+1)*50)-10])
+	for i in text1:
+# 		print i
+
+		iIndex = text1.index(i)
+	
+		j = font.render(i, True, [255,255,255])
+		screen.blit(j, [50, ((iIndex+1)*50)-10])
+		
+	for i in text2:
+# 		print i
+
+		iIndex = text2.index(i)
+	
+		j = font.render(i, True, [255,255,255])
+		screen.blit(j, [600, ((iIndex+1)*50)-10])
+
+else:
+# For each item in the list of high scores, blit at a different y coordinate:
+	for i in text:
+# 		print i
+
+		iIndex = text.index(i)
+	
+		j = font.render(i, True, [255,255,255])
+		screen.blit(j, [50, ((iIndex+1)*50)-10])
 
 # main loop:
 while 1:
@@ -42,6 +63,3 @@ while 1:
 			sys.exit()
 
 	pygame.display.flip()
-
-
-
