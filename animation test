@@ -22,12 +22,28 @@ frame11 = pygame.image.load('mole_animation_11.gif')
 frame12 = pygame.image.load('mole_animation_12.gif')
 frame13 = pygame.image.load('mole_animation_13.gif')
 
-image = frame1
+frames = [frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame9,frame10,frame11,frame12,frame13]
+
+global image
+
+image = frames[0]
+
+def updateFrame():
+	global image
+	
+	try:
+		newImage = frames[frames.index(image)+1]
+		image = newImage
+	except:
+		image = frames[0]
 
 disp = image.get_rect(center = (150,150))
 
 while 1:
 	for event in pygame.event.get():
+		if event.type == MOUSEBUTTONDOWN:
+			updateFrame()
+		
 		if event.type == pygame.QUIT:
 				pygame.quit()
 				sys.exit()
