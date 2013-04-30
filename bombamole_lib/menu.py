@@ -1,47 +1,12 @@
-import pygame
+
 from pygame import *
 font.init()
 
 from math import cos,radians
 import primary
 
-# this creates the image for the cursor as ascii art:
-
-thickarrow_strings = (               #sized 24x24
-"       XXXXXXXXXX       ",
-"     XX..........XX     ",
-"    X..XXXX..XXXX..X    ",
-"   X.XX   X..X   XX.X   ",
-"  X.X     X..X     X.X  ",
-" X.X      X..X      X.X ",
-" X.X      X..X      X.X ",
-"X.X       X..X       X.X",
-"X.X       X..X       X.X",
-"X.X       X..X       X.X",
-"X.XXXXXXXXX..XXXXXXXXX.X",
-"X......................X",
-"X......................X",
-"X.XXXXXXXXX..XXXXXXXXX.X",
-"X.X       X..X       X.X",
-"X.X       X..X       X.X",
-"X.X       X..X       X.X",
-" X.X      X..X      X.X ",
-" X.X      X..X      X.X ",
-"  X.X     X..X     X.X  ",
-"   X.XX   X..X   XX.X   ",
-"    X..XXXX..XXXX..X    ",
-"     XX..........XX     ",
-"       XXXXXXXXXX       ")
-
-# compiles the cursor from ascii art:
-
-mousecursor = pygame.cursors.compile(thickarrow_strings, black='X', white='.', xor='o')
-
-# defines cursor size:
-
-cursorsize = [24,24]
         
-def menu(menu,pos='right',font1=None,font2=None,color1=(128,128,128),color2=None,interline=5,justify=True,light=5,speed=300,lag=30):
+def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=None,interline=5,justify=True,light=5,speed=300,lag=30):
    
 
     class Item(Rect):
@@ -87,9 +52,9 @@ def menu(menu,pos='right',font1=None,font2=None,color1=(128,128,128),color2=None
                 a.pop(0)
                 if not lag: break
             if lag:
-                foo,bar = divmod(c,lag)
-                if not bar and foo < len(menu):
-                    a.append(menu[foo])
+                real,variable = divmod(c,lag)
+                if not variable and real < len(menu):
+                    a.append(menu[real])
             clk.tick(speed)
         
     
@@ -138,8 +103,6 @@ def menu(menu,pos='right',font1=None,font2=None,color1=(128,128,128),color2=None
     
     while True:
         
-        pygame.mouse.set_cursor(cursorsize,(12,12),*mousecursor)
-        
         ev = event.wait()
         if ev.type == MOUSEMOTION:
             idx_ = Rect(ev.pos,(0,0)).collidelist(menu)
@@ -183,19 +146,19 @@ class run(object):
         here = dirname(__file__)
         scr = display.set_mode((1200,650))
         print(menu.__doc__)
-        f = font.Font(join('data/FEASFBRG.TTF'),45)
-        f1 = font.Font(join('data/FEASFBRG.TTF'),25)
-        f2 = font.Font(join('data/FEASFBRG.TTF'),15)
-        mainmenu = f.render('Bomb A Mole!',1,(255,255,255))
+        f = font.Font(join('data/FEASFBRG.ttf'),45)
+        f1 = font.Font(join('data/FEASFBRG.ttf'),40)
+        f2 = font.Font(join('data/FEASFBRG.ttf'),35)
+        mainmenu = f.render('Main Menu',1,(255,255,255))
         r = mainmenu.get_rect()
-        r.centerx,r.top = 800,120
+        r.centerx,r.top = 100,10
         background_main = image.load('data/bomb-a-mole_screenbackground.png').convert()
-        scr.blit(background_main,(0,0))
+        scr.blit(background_main,(100,50))
         bg = scr.copy()
         scr.blit(mainmenu,r)
         display.flip()
         
-        menu1 = {"menu":['PLAY','HIGHSCORES','INSTRUCTIONS','EXIT'],"font1":f1,"pos":'center',"color1":(154,180,61),"light":6,"speed":200,"lag":20}
+        menu1 = {"menu":['PLAY','HIGHSCORES','INSTRUCTIONS','EXIT'],"font1":f1,"pos":(800,225),"color1":(154,180,61),"light":6,"speed":200,"lag":20}
 
         menus = (menu1)
         playlist = [menu1]
