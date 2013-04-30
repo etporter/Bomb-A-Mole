@@ -9,6 +9,8 @@ global veggieTotal, playerScore
 veggieTotal = 36
 playerScore = 0
 
+clock = pygame.time.Clock()
+
 # this creates the image for the cursor as ascii art:
 
 thickarrow_strings = (               #sized 24x24
