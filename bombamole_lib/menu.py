@@ -3,7 +3,7 @@ from pygame import *
 font.init()
 
 from math import cos,radians
-import primary
+import primary,high_score,instruction_window
 
         
 def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=None,interline=5,justify=True,light=5,speed=300,lag=30):
@@ -175,8 +175,14 @@ class run(object):
             moleGame = primary.game()
             moleGame.run()
 
-      #  if resp == 'INSTRUCTIONS':
-      #  if resp == 'HIGHSCORES':
+        if resp == 'INSTRUCTIONS':
+            display.update(scr.blit(bg,r,r))
+            instr = instruction_window.instr()
+            instr.run()
+        if resp == 'HIGHSCORES':
+            display.update(scr.blit(bg,r,r))
+            hs = high_score.hs()
+            hs.run()
        
             
         
