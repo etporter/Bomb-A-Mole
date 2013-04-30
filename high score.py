@@ -25,7 +25,7 @@ text = str(intext).split('.')
 
 print text
 
-if len(text) > 12:
+if len(text) > 12 and len(text) < 24:
 	text1 = text[0:12]
 	text2 = text[12:]
 	
@@ -43,7 +43,36 @@ if len(text) > 12:
 		iIndex = text2.index(i)
 	
 		j = font.render(i, True, [255,255,255])
-		screen.blit(j, [600, ((iIndex+1)*50)-10])
+		screen.blit(j, [400, ((iIndex+1)*50)-10])
+		
+elif len(text) > 24:
+	text1 = text[0:12]
+	text2 = text[12:24]
+	text3 = text[24:]
+	
+	for i in text1:
+# 		print i
+
+		iIndex = text1.index(i)
+	
+		j = font.render(i, True, [255,255,255])
+		screen.blit(j, [50, ((iIndex+1)*50)-10])
+		
+	for i in text2:
+# 		print i
+
+		iIndex = text2.index(i)
+	
+		j = font.render(i, True, [255,255,255])
+		screen.blit(j, [400, ((iIndex+1)*50)-10])
+		
+	for i in text3:
+# 		print i
+
+		iIndex = text3.index(i)
+	
+		j = font.render(i, True, [255,255,255])
+		screen.blit(j, [800, ((iIndex+1)*50)-10])
 
 else:
 # For each item in the list of high scores, blit at a different y coordinate:
