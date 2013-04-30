@@ -1,0 +1,38 @@
+from pygame.locals import *
+import pygame,sys
+
+pygame.init()
+
+size = 300, 300
+screen = pygame.display.set_mode(size)
+
+clock = pygame.time.Clock()
+
+frame1 = pygame.image.load('mole_animation_1.gif')
+frame2 = pygame.image.load('mole_animation_2.gif')
+frame3 = pygame.image.load('mole_animation_3.gif')
+frame4 = pygame.image.load('mole_animation_4.gif')
+frame5 = pygame.image.load('mole_animation_5.gif')
+frame6 = pygame.image.load('mole_animation_6.gif')
+frame7 = pygame.image.load('mole_animation_7.gif')
+frame8 = pygame.image.load('mole_animation_8.gif')
+frame9 = pygame.image.load('mole_animation_9.gif')
+frame10 = pygame.image.load('mole_animation_10.gif')
+frame11 = pygame.image.load('mole_animation_11.gif')
+frame12 = pygame.image.load('mole_animation_12.gif')
+frame13 = pygame.image.load('mole_animation_13.gif')
+
+image = frame1
+
+disp = image.get_rect(center = (150,150))
+
+while 1:
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+				pygame.quit()
+				sys.exit()
+				
+	clock.tick(10)
+	
+	screen.blit(image,disp)
+	pygame.display.flip()
