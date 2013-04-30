@@ -5,7 +5,7 @@ import sys, pygame
  
 pygame.init() 
 
-class hs:
+class hs(object):
         def __init__(self):
                 pygame.display.set_caption('High Score')
 

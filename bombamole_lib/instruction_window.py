@@ -1,10 +1,11 @@
 import pygame
+import menu
  
  
 pygame.init()
   
 
-class instr:
+class instr(object):
         def __init__(self):
                 pygame.display.set_caption('Instructions')
  
@@ -96,6 +97,9 @@ class instr:
                         clock.tick(5)
                         
                         pygame.display.flip()
+
+                mymenu = menu.run()
+                mymenu.runm()
 
 if __name__ == "__main__":
         start = instr()
