@@ -39,27 +39,27 @@ thickarrow_strings = (               #sized 24x24
 "    X..XXXX..XXXX..X    ",
 "     XX..........XX     ",
 "       XXXXXXXXXX       ")
-mainClock = pygame.time.Clock()
-boomAnim = pyganim.PygAnimation([('data/kaboom_frame2.png', 0.1),
-                                ('data/kaboom_frame3.png', 0.1),
-                                ('data/kaboom_frame4.png', 0.1),
-                                ('data/kaboom_frame5.png', 0.1),
-                                ('data/kaboom_frame6.png', 0.3),
-                                ('data/kaboom_frame7.png', 0.3)], loop=False)
-
-moleAnim = pyganim.PygAnimation([('data/mole_animation_1.gif', 0.1),
-                                 ('data/mole_animation_2.gif', 0.1),
-                                 ('data/mole_animation_3.gif', 0.1),
-                                 ('data/mole_animation_4.gif', 0.1),
-                                 ('data/mole_animation_5.gif', 0.1),
-                                 ('data/mole_animation_6.gif', 0.1),
-                                 ('data/mole_animation_7.gif', 0.1),
-                                 ('data/mole_animation_8.gif', 0.1),
-                                 ('data/mole_animation_9.gif', 0.1),
-                                 ('data/mole_animation_10.gif', 0.1),
-                                 ('data/mole_animation_11.gif', 0.1),
-                                 ('data/mole_animation_12.gif', 0.1),
-                                 ('data/mole_animation_13.gif', 0.1)],loop=False)
+##mainClock = pygame.time.Clock()
+##boomAnim = pyganim.PygAnimation([('data/kaboom_frame2.png', 0.1),
+##                                ('data/kaboom_frame3.png', 0.1),
+##                                ('data/kaboom_frame4.png', 0.1),
+##                                ('data/kaboom_frame5.png', 0.1),
+##                                ('data/kaboom_frame6.png', 0.3),
+##                                ('data/kaboom_frame7.png', 0.3)], loop=False)
+##
+##moleAnim = pyganim.PygAnimation([('data/mole_animation_1.gif', 0.1),
+##                                 ('data/mole_animation_2.gif', 0.1),
+##                                 ('data/mole_animation_3.gif', 0.1),
+##                                 ('data/mole_animation_4.gif', 0.1),
+##                                 ('data/mole_animation_5.gif', 0.1),
+##                                 ('data/mole_animation_6.gif', 0.1),
+##                                 ('data/mole_animation_7.gif', 0.1),
+##                                 ('data/mole_animation_8.gif', 0.1),
+##                                 ('data/mole_animation_9.gif', 0.1),
+##                                 ('data/mole_animation_10.gif', 0.1),
+##                                 ('data/mole_animation_11.gif', 0.1),
+##                                 ('data/mole_animation_12.gif', 0.1),
+##                                 ('data/mole_animation_13.gif', 0.1)],loop=False)
 
 # compiles the cursor from ascii art:
 
@@ -177,19 +177,17 @@ class cell:
 		elif self.bombTicker == 3:
 			self.kind = 4
 			if self.kind == 4:
-                                boomAnim.play()
-                                while True: # main loop
-                                    for event in pygame.event.get():
-                                        if event.type == QUIT:
-                                            pygame.quit()
-                                            sys.exit()
-                                        boomAnim.blit(game.screen,(self.x-100,self.y-100))
-                                        pygame.display.update()
-                                        mainClock.tick(30)
+                                #boomAnim.play()
+                                #while True: # main loop
+                                #    for event in pygame.event.get():
+                                #        if event.type == QUIT:
+                                #            pygame.quit()
+                                #            sys.exit()
+                                #        boomAnim.blit(game.screen,(self.x-100,self.y-100))
+                                #        pygame.display.update()
+                                #        mainClock.tick(30)
 # 				time.sleep(2)
 				self.image = self.crater
-				pygame.display.update()
-				mainClock.tick(30)
 			
 # 			Method for the vegetable being eaten:
 # 			(I found it was easier to have the cell decide if it's been eaten, than have the mole decide)

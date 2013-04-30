@@ -159,9 +159,10 @@ class run(object):
         display.flip()
         
         menu1 = {"menu":['PLAY','HIGHSCORES','INSTRUCTIONS','EXIT'],"font1":f1,"pos":(800,225),"color1":(154,180,61),"light":6,"speed":200,"lag":20}
+        menu2 = {"menu":['BACK'],"pos":(20,450),"color1":(154,180,61),"light":5,"speed":0,"font2":f1,"justify":0}
 
-        menus = (menu1)
-        playlist = [menu1]
+        menus = (menu1,menu2)
+        playlist = [menu1,menu2]
         
         resp = "re-show"
         while resp == "re-show":
@@ -181,8 +182,13 @@ class run(object):
             instr.run()
         if resp == 'HIGHSCORES':
             display.update(scr.blit(bg,r,r))
+         #   resp = menu(**menu2)[0]
             hs = high_score.hs()
             hs.run()
+        #if resp == 'BACK':
+        #   scr.blit(background_main,(0,0))
+        #   display.update(scr.blit(f.render('Bomb A Mole!',1,(255,255,255)),(185,120)))
+        #   resp = menu(**menu1)[0]
        
             
         
