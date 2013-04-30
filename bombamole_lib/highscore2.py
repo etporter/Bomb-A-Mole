@@ -35,7 +35,7 @@ class hs(object):
 		
 		print secondText
 
-		secondText = sorted(secondText, key = lambda i: i[1])
+		secondText = sorted(secondText, key = lambda i: int(i[1]))
 
 		if len(secondText) > 12 and len(secondText) < 24:
 			text1 = secondText[0:12]
