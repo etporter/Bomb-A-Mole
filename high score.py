@@ -22,12 +22,20 @@ intext = file.read()
 # 	print line 
 # 	line = file.readline()
 
-text = intext.split('.')
+text = str(intext).split('.')
 
 print text
 
-text=font.render(text, True, [255,255,255])
-screen.blit(text, [100, 200]) 
+for i in text:
+	print i
+
+	iIndex = text.index(i)
+	
+	j = font.render(i, True, [255,255,255])
+	screen.blit(j, [100, (iIndex+1)*50])
+
+# text=font.render(text, True, [255,255,255])
+# screen.blit(text, [100, 200]) 
 
 while 1:
 	for event in pygame.event.get():
