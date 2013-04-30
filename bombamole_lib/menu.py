@@ -3,7 +3,7 @@ from pygame import *
 font.init()
 
 from math import cos,radians
-import primary,high_score,instruction_window
+import primary,high_score,instruction_window,pyganim
 
         
 def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=None,interline=5,justify=True,light=5,speed=300,lag=30):

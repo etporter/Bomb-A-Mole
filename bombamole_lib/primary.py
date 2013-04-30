@@ -39,6 +39,27 @@ thickarrow_strings = (               #sized 24x24
 "    X..XXXX..XXXX..X    ",
 "     XX..........XX     ",
 "       XXXXXXXXXX       ")
+mainClock = pygame.time.Clock()
+boomAnim = pyganim.PygAnimation([('data/kaboom_frame2.png', 0.1),
+                                ('data/kaboom_frame3.png', 0.1),
+                                ('data/kaboom_frame4.png', 0.1),
+                                ('data/kaboom_frame5.png', 0.1),
+                                ('data/kaboom_frame6.png', 0.3),
+                                ('data/kaboom_frame7.png', 0.3)], loop=False)
+
+moleAnim = pyganim.PygAnimation([('data/mole_animation_1.gif', 0.1),
+                                 ('data/mole_animation_2.gif', 0.1),
+                                 ('data/mole_animation_3.gif', 0.1),
+                                 ('data/mole_animation_4.gif', 0.1),
+                                 ('data/mole_animation_5.gif', 0.1),
+                                 ('data/mole_animation_6.gif', 0.1),
+                                 ('data/mole_animation_7.gif', 0.1),
+                                 ('data/mole_animation_8.gif', 0.1),
+                                 ('data/mole_animation_9.gif', 0.1),
+                                 ('data/mole_animation_10.gif', 0.1),
+                                 ('data/mole_animation_11.gif', 0.1),
+                                 ('data/mole_animation_12.gif', 0.1),
+                                 ('data/mole_animation_13.gif', 0.1)],loop=False)
 
 # compiles the cursor from ascii art:
 
@@ -156,18 +177,15 @@ class cell:
 		elif self.bombTicker == 3:
 			self.kind = 4
 			if self.kind == 4:
-                                mainClock = pygame.time.Clock()
-                                while 1:
-                                        boomAnim = pyganim.PygAnimation([('data/kaboom_frame1.png', 0.1),
-                                              ('data/kaboom_frame2.png', 0.1),
-                                              ('data/kaboom_frame3.png', 0.1),
-                                              ('data/kaboom_frame4.png', 0.1),
-                                              ('data/kaboom_frame5.png', 0.1),
-                                              ('data/kaboom_frame6.png', 0.3),
-                                              ('data/kaboom_frame7.png', 0.3),
-                                              ('data/kaboom_frame1.png', 0.3)], loop=False)
-                                        boomAnim.play()
-                                        boomAnim.blit(game.screen,(self.x-75,self.y-100))
+                                boomAnim.play()
+                                while True: # main loop
+                                    for event in pygame.event.get():
+                                        if event.type == QUIT:
+                                            pygame.quit()
+                                            sys.exit()
+                                        boomAnim.blit(game.screen,(self.x-100,self.y-100))
+                                        pygame.display.update()
+                                        mainClock.tick(30)
 # 				time.sleep(2)
 				self.image = self.crater
 				pygame.display.update()
@@ -193,7 +211,15 @@ class cell:
 			
 			self.kind = 4
 			if self.kind == 4:
-                               # self.manim = manim(self.x,self.y)
+                               # moleAnim.play()
+                                #while True: # main loop
+                                 #   for event in pygame.event.get():
+                                  #      if event.type == QUIT:
+                                   #         pygame.quit()
+                                    #        sys.exit()
+                                     #   moleAnim.blit(game.screen,(self.x,self.y))
+                                      #  pygame.display.update()
+                                       # mainClock.tick(30) 
 # 				time.sleep(2)
 				self.image = self.crater
 
@@ -396,57 +422,7 @@ class mole:
 		print 'New index:',self.locationIndex
 		
 		self.locationIndex = self.squareCenters.index(self.position)
-class banim:
-        def __init__(self,mouseX,mouseY):# create the animation objects   ('filename of image',    duration_in_seconds)
-                self.x = mouseX
-                self.y = mouseY
-                boomAnim = pyganim.PygAnimation([('data/kaboom_frame1.png', 0.1),
-                                      ('data/kaboom_frame2.png', 0.1),
-                                      ('data/kaboom_frame3.png', 0.1),
-                                      ('data/kaboom_frame4.png', 0.1),
-                                      ('data/kaboom_frame5.png', 0.1),
-                                      ('data/kaboom_frame6.png', 0.3),
-                                      ('data/kaboom_frame7.png', 0.3),
-                                      ('data/kaboom_frame1.png', 0.3)], loop=False)
-                boomAnim.play()
-                # there is also a pause() and stop() method
 
-                mainClock = pygame.time.Clock()
-                while 1:
-                    boomAnim.blit(game.screen,(self.x-75,self.y-100))
-
-                    pygame.display.update()
-                    mainClock.tick(30)
-        
-
-class manim:
-        def __init__(self,mouseX,mouseY):
-            self.x = mouseX
-            self.y = mouseY
-            # create the animation objects   ('filename of image',    duration_in_seconds)
-            moleAnim = pyganim.PygAnimation([('data/mole_animation_1.gif', 0.1),
-                                 ('data/mole_animation_2.gif', 0.1),
-                                 ('data/mole_animation_3.gif', 0.1),
-                                 ('data/mole_animation_4.gif', 0.1),
-                                 ('data/mole_animation_5.gif', 0.1),
-                                 ('data/mole_animation_6.gif', 0.1),
-                                 ('data/mole_animation_7.gif', 0.1),
-                                 ('data/mole_animation_8.gif', 0.1),
-                                 ('data/mole_animation_9.gif', 0.1),
-                                 ('data/mole_animation_10.gif', 0.1),
-                                 ('data/mole_animation_11.gif', 0.1),
-                                 ('data/mole_animation_12.gif', 0.1),
-                                 ('data/mole_animation_13.gif', 0.1),
-                                 ('data/kaboom_frame1.png',0.1)],loop=False)
-            moleAnim.play() # there is also a pause() and stop() method
-
-            mainClock = pygame.time.Clock()
-            while True:
-                moleAnim.blit(game.screen,(self.x-75,self.y-100))
-
-                pygame.display.update()
-                mainClock.tick(30) # Feel free to experiment with any FPS setting.
-            return
 class game:
 	def __init__(self):
 	
