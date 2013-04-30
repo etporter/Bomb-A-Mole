@@ -163,7 +163,7 @@ class cell:
 # 			Method for the vegetable being eaten:
 # 			(I found it was easier to have the cell decide if it's been eaten, than have the mole decide)
 			
-	def eaten(self,count):
+	def eaten(self,count,x,y):
 	
 # 	the mole eats every other turn
 	
@@ -180,8 +180,7 @@ class cell:
 			
 			self.kind = 4
 			if self.kind == 4:
-                              #  munching = mole_animation.manim()
-                             #   munching.run()
+                               # self.manim = manim(self.x,self.y)
 # 				time.sleep(2)
 				self.image = self.crater
 
@@ -395,15 +394,42 @@ class banim:
                                              ('data/kaboom_frame4.png', 0.1),
                                              ('data/kaboom_frame5.png', 0.1),
                                              ('data/kaboom_frame6.png', 0.1),
-                                             ('data/kaboom_frame7.png', 0.1)])
+                                             ('data/kaboom_frame7.png', 0.1)], loop=False)
             boomAnim.play() # there is also a pause() and stop() method
 
             mainClock = pygame.time.Clock()
             while True:
-                boomAnim.blit(game.screen,(self.x,self.y))
+                boomAnim.blit(game.screen,(self.x-75,self.y-100))
 
                 pygame.display.update()
-                mainClock.tick(30) # Feel free to experiment with any FPS setting.	
+                mainClock.tick(30) # Feel free to experiment with any FPS setting.
+
+class manim:
+        def __init__(self,mouseX,mouseY):
+            self.x = mouseX
+            self.y = mouseY
+            # create the animation objects   ('filename of image',    duration_in_seconds)
+            moleAnim = pyganim.PygAnimation([('data/mole_animation_1.gif', 0.1),
+                                 ('data/mole_animation_2.gif', 0.1),
+                                 ('data/mole_animation_3.gif', 0.1),
+                                 ('data/mole_animation_4.gif', 0.1),
+                                 ('data/mole_animation_5.gif', 0.1),
+                                 ('data/mole_animation_6.gif', 0.1),
+                                 ('data/mole_animation_7.gif', 0.1),
+                                 ('data/mole_animation_8.gif', 0.1),
+                                 ('data/mole_animation_9.gif', 0.1),
+                                 ('data/mole_animation_10.gif', 0.1),
+                                 ('data/mole_animation_11.gif', 0.1),
+                                 ('data/mole_animation_12.gif', 0.1),
+                                 ('data/mole_animation_13.gif', 0.1)],loop=False)
+            moleAnim.play() # there is also a pause() and stop() method
+
+            mainClock = pygame.time.Clock()
+            while True:
+                moleAnim.blit(game.screen,(self.x-75,self.y-100))
+
+                pygame.display.update()
+                mainClock.tick(30) # Feel free to experiment with any FPS setting.
 class game:
 	def __init__(self):
 	
@@ -478,7 +504,7 @@ class game:
 						del self.mole
 						self.mole = mole()
 					if i.kind == 1 or i.kind == 2:
-						cell.eaten(i,self.clickCount)
+						cell.eaten(i,self.clickCount,i.x,i.y)
 
 			self.moleCell = cell(self.moleSquare,880,120)
 			
