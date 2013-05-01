@@ -1,9 +1,11 @@
 from pygame.locals import *
-import time,math,random,pygame,sys
+import time,math,random,pygame,sys,os
 import menu
-import pyganim
+import pyganim,cPickle,datetime,hs
 
 pygame.init()
+
+SCORES = "scores.pickle"
 
 global veggieTotal, playerScore
 
@@ -496,9 +498,11 @@ class game:
 			if veggieTotal == 0:
 				print 'Game over'
 				print 'Score:', playerScore
-# 				del self
+				#record = hs.main()
+				#record.run()
 				pygame.time.wait(500)
-				break
+				goBack = menu.run()
+				goBack.runm()
 		
 
 if __name__ == "__main__" :
