@@ -47,19 +47,19 @@ boomAnim = pyganim.PygAnimation([('data/kaboom_frame2.png', 0.1),
                                 ('data/kaboom_frame6.png', 0.3),
                                 ('data/kaboom_frame7.png', 0.3)], loop=False)
 
-##moleAnim = pyganim.PygAnimation([('data/mole_animation_1.gif', 0.1),
-##                                 ('data/mole_animation_2.gif', 0.1),
-##                                 ('data/mole_animation_3.gif', 0.1),
-##                                 ('data/mole_animation_4.gif', 0.1),
-##                                 ('data/mole_animation_5.gif', 0.1),
-##                                 ('data/mole_animation_6.gif', 0.1),
-##                                 ('data/mole_animation_7.gif', 0.1),
-##                                 ('data/mole_animation_8.gif', 0.1),
-##                                 ('data/mole_animation_9.gif', 0.1),
-##                                 ('data/mole_animation_10.gif', 0.1),
-##                                 ('data/mole_animation_11.gif', 0.1),
-##                                 ('data/mole_animation_12.gif', 0.1),
-##                                 ('data/mole_animation_13.gif', 0.1)],loop=False)
+moleAnim = pyganim.PygAnimation([('data/mole_animation_1.gif', 0.1),
+                                 ('data/mole_animation_2.gif', 0.1),
+                                 ('data/mole_animation_3.gif', 0.1),
+                                 ('data/mole_animation_4.gif', 0.1),
+                                 ('data/mole_animation_5.gif', 0.1),
+                                 ('data/mole_animation_6.gif', 0.1),
+                                 ('data/mole_animation_7.gif', 0.1),
+                                 ('data/mole_animation_8.gif', 0.1),
+                                 ('data/mole_animation_9.gif', 0.1),
+                                 ('data/mole_animation_10.gif', 0.1),
+                                 ('data/mole_animation_11.gif', 0.1),
+                                 ('data/mole_animation_12.gif', 0.1),
+                                 ('data/mole_animation_13.gif', 0.1)],loop=False)
 
 # compiles the cursor from ascii art:
 
@@ -158,7 +158,7 @@ class cell:
 	
 # 	define a method for the bomb exploding:
 	
-	def boom(self,count,x,y):
+	def boom(self,count):
 		
 # 		pass in the bomb count
 		
@@ -177,23 +177,13 @@ class cell:
 		elif self.bombTicker == 3:
 			self.kind = 4
 			if self.kind == 4:
-                                windowSurface = pygame.display.set_mode((1200, 650), pygame.SRCALPHA, 32)
-                                boomAnim.play()
-                                while True: # main loop
-                                    for event in pygame.event.get():
-                                        if event.type == QUIT:
-                                            pygame.quit()
-                                            sys.exit()
-                                        boomAnim.blit(windowSurface,(self.x-100,self.y-100))
-                                        pygame.display.update()
-                                        mainClock.tick(30)
 # 				time.sleep(2)
 				self.image = self.crater
 			
 # 			Method for the vegetable being eaten:
 # 			(I found it was easier to have the cell decide if it's been eaten, than have the mole decide)
 			
-	def eaten(self,count,x,y):
+	def eaten(self,count):
 	
 # 	the mole eats every other turn
 	
@@ -210,15 +200,7 @@ class cell:
 			
 			self.kind = 4
 			if self.kind == 4:
-                               # moleAnim.play()
-                                #while True: # main loop
-                                 #   for event in pygame.event.get():
-                                  #      if event.type == QUIT:
-                                   #         pygame.quit()
-                                    #        sys.exit()
-                                     #   moleAnim.blit(game.screen,(self.x,self.y))
-                                      #  pygame.display.update()
-                                       # mainClock.tick(30) 
+                                
 # 				time.sleep(2)
 				self.image = self.crater
 
@@ -473,7 +455,11 @@ class game:
 						i.bombTicker += 1
 						cell.placeBomb(i,self.mX,self.mY)
 						if i.kind == 3:
-							cell.boom(i,i.bombTicker,i.x,i.y)
+							cell.boom(i,i.bombTicker)
+							if i.kind == 4:
+                                                                boomAnim.play()
+                                                                boomAnim.blit(self.screen,(1000,120))
+							
 					
 					mole.move(self.mole,self.cells)
 						
@@ -496,7 +482,10 @@ class game:
 						del self.mole
 						self.mole = mole()
 					if i.kind == 1 or i.kind == 2:
-						cell.eaten(i,self.clickCount,i.x,i.y)
+						cell.eaten(i,self.clickCount)
+						if i.kind == 4:
+                                                        moleAnim.play()
+                                                        moleAnim.blit(self.screen, (1045,300))
 
 			self.moleCell = cell(self.moleSquare,880,120)
 			
@@ -510,6 +499,7 @@ class game:
 # 				del self
 				pygame.time.wait(500)
 				break
+		
 
 if __name__ == "__main__" :
         play = game()
