@@ -468,7 +468,7 @@ class game:
 		self.font = pygame.font.Font('data/FEASFBRG.ttf',30)
 		
 		self.moleLabel = self.font.render('Mole is hiding under:', True, [255,255,255])
-		self.screen.blit(self.moleLabel, [880,120])
+		self.screen.blit(self.moleLabel, [760,60])
 		
 # 		initialize the mole object:
 		
@@ -537,7 +537,7 @@ class game:
                                                 #        moleAnim.play()
                                                 #        moleAnim.blit(self.screen, (1045,300))
 
-			self.moleCell = cell(self.moleSquare,880,220)
+			self.moleCell = cell(self.moleSquare,880,160)
 			
 # 			self.animationBlit(self.cellXblit,self.cellYblit)
 			self.animationBlit(blitX,blitY)
