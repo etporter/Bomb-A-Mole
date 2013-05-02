@@ -47,7 +47,7 @@ def ask(screen, question):
 
 def main():
   screen = pygame.display.set_mode((1200,650))
-  main.scoring = ask(screen, "Name")
+  main.scoring = ask(screen, "Enter Username")
   main.a = ','+main.scoring+'.'+str(primary.playerScore)
   file.write(main.a)
   menutime = menu.run()
