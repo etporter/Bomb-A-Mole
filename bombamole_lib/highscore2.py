@@ -1,7 +1,7 @@
 """
 This is a program for displaying the user's high scores.
 """
-import sys, pygame
+import sys, pygame,menu
  
 pygame.init() 
 
@@ -12,7 +12,7 @@ class hs(object):
 		# set the window size:
 		dimensions=[1200,650]
 
-		font = pygame.font.Font('data/FEASFBRG.ttf', 48)
+		font = pygame.font.Font('data/FEASFBRG.ttf', 30)
 
 		screen=pygame.display.set_mode(dimensions)
 
