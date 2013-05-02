@@ -211,6 +211,7 @@ class cell:
                         deadMole.play()
                         blitdX = self.x
                         blitdY = self.y
+                        self.image = self.crater
 			
 # 			Method for the vegetable being eaten:
 # 			(I found it was easier to have the cell decide if it's been eaten, than have the mole decide)
