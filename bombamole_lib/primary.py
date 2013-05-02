@@ -11,6 +11,8 @@ global veggieTotal, playerScoreg, blitX, blitY
 
 blitX = 10
 blitY = 10
+blitmX = 10
+blitmY = 10
 
 veggieTotal = 36
 playerScore = 0
@@ -47,8 +49,8 @@ boomAnim = pyganim.PygAnimation([('data/kaboom_frame2.png', 0.1),
                                 ('data/kaboom_frame3.png', 0.1),
                                 ('data/kaboom_frame4.png', 0.1),
                                 ('data/kaboom_frame5.png', 0.1),
-                                ('data/kaboom_frame6.png', 0.3),
-                                ('data/kaboom_frame7.png', 0.3)], loop=False)
+                                ('data/kaboom_frame6.png', 0.1),
+                                ('data/kaboom_frame7.png', 0.1)], loop=False)
 
 moleAnim = pyganim.PygAnimation([('data/mole_animation_1.gif', 0.1),
                                  ('data/mole_animation_2.gif', 0.1),
@@ -197,7 +199,7 @@ class cell:
 	def eaten(self,count):
 	
 # 	the mole eats every other turn
-	
+                global blitmX,blitmY
 		self.moleTicker = count
 		if self.moleTicker == 2:
 #			self.image = self.mole
@@ -211,6 +213,9 @@ class cell:
 			
 			self.kind = 4
 			if self.kind == 4:
+                                moleAnim.play()
+                                blitmX = self.x
+                                blitmY = self.y
                                 
 # 				time.sleep(2)
 				self.image = self.crater
@@ -498,9 +503,9 @@ class game:
 						self.mole = mole()
 					if i.kind == 1 or i.kind == 2:
 						cell.eaten(i,self.clickCount)
-						if i.kind == 4:
-                                                        moleAnim.play()
-                                                        moleAnim.blit(self.screen, (1045,300))
+						#if i.kind == 4:
+                                                #        moleAnim.play()
+                                                #        moleAnim.blit(self.screen, (1045,300))
 
 			self.moleCell = cell(self.moleSquare,880,120)
 			
@@ -520,6 +525,9 @@ class game:
 				goBack = menu.run()
 				goBack.runm()
 				
+        def animationBlitm(self,x,y):
+                self.blitmX = x-40
+                self.blitmY = y-40
 	def animationBlit(self,x,y):
 		self.blitX = x-80
 		self.blitY = y-80
