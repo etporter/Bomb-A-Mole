@@ -6,8 +6,10 @@ import pyganim,cPickle,datetime,hs
 pygame.init()
 
 
-global veggieTotal, playerScore, blitX, blitY, blitmX, blitmY, highscorefile
+global veggieTotal, playerScore, blitX, blitY, blitmX, blitmY, highscorefile, blitdX, blitdY
 
+blitdX = 10
+blitdY = 10
 blitX = 10
 blitY = 10
 blitmX = 10
@@ -99,9 +101,6 @@ class cell:
 		self.bomb2 = pygame.image.load('bombfusehalf_final.png')
 		self.bomb3 = pygame.image.load('bombfuseshort.png')
 		
-		self.boomSound = pygame.mixer.Sound('data/Music/explosion.wav')
-		self.munchSound = pygame.mixer.Sound('data/Music/Munching noise.wav')
-		
 #		self.mole = pygame.image.load('mole_final.png')
 #		self.booming = pygame.image.load('boom.png')
 
@@ -176,7 +175,7 @@ class cell:
 	
 	def boom(self,count):
 		
-		global blitX,blitY
+		global blitX,blitY,blitdX,blitdY
 		
 # 		pass in the bomb count
 		
@@ -197,13 +196,16 @@ class cell:
 			if self.kind == 4:
 # 				time.sleep(2)
 				boomAnim.play()
-				self.boomSound.play()
 # 				boomAnim.blit(game.screen,(self.x,self.y))
 				
 				blitX = self.x
 				blitY = self.y
 
 				self.image = self.crater
+		elif self.bombTicker == 5:
+                        deadMole.play()
+                        blitdX = self.x
+                        blitdY = self.y
 			
 # 			Method for the vegetable being eaten:
 # 			(I found it was easier to have the cell decide if it's been eaten, than have the mole decide)
@@ -231,11 +233,26 @@ class cell:
 # 				moleAnim.play()
 # 				blitmX = self.x
 # 				blitmY = self.y
-				self.munchSound.play()
                                 
 # 				time.sleep(2)
 				self.image = self.crater
 
+
+# Basic Game Logic:
+
+# Level Lost:
+# 		Get user name
+# 			Save user name
+# 		Print score
+# 
+# 		Prompt user:
+# 			play again?
+# 			if answer == yes:
+# 				Enter game loop
+# 			elif:
+# 				Return main menu.
+
+# End game loop
 
 # the mole class:
 # (this class basically boils down to a tuple of two numbers, i.e. the mole's coordinates)
@@ -498,7 +515,7 @@ class game:
 					if i.kind == 3:
 						print 'Mole killed!'
 						playerScore += 20+(veggieTotal*5)
-						cell.boom(i,3)
+						cell.boom(i,5)
 						del self.mole
 						self.mole = mole()
 					if i.kind == 1 or i.kind == 2:
@@ -512,6 +529,7 @@ class game:
 # 			self.animationBlit(self.cellXblit,self.cellYblit)
 			self.animationBlit(blitX,blitY)
 			self.animationBlitm(blitmX,blitmY)
+			self.animationBlitd(blitdX,blitdY)
 			
 			self.screen.blit(self.moleCell.image,self.moleCell.disp)
 			pygame.display.flip()
@@ -537,6 +555,10 @@ class game:
 		self.blitmX = x-40
 		self.blitmY = y-40
 		moleAnim.blit(self.screen,(self.blitmX,self.blitmY))
+	def animationBlitd(self,x,y):
+		self.blitdX = x-40
+		self.blitdY = y-40
+		deadMole.blit(self.screen,(self.blitdX,self.blitdY))
 
 	def animationBlit(self,x,y):
 		self.blitX = x-80
