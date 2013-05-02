@@ -212,6 +212,7 @@ class cell:
                         blitdX = self.x
                         blitdY = self.y
                         self.image = self.crater
+                        self.kind = 4
 			
 # 			Method for the vegetable being eaten:
 # 			(I found it was easier to have the cell decide if it's been eaten, than have the mole decide)
@@ -454,6 +455,8 @@ class game:
 	
 		self.size = 1200, 650
 		game.screen = pygame.display.set_mode((self.size),0,32)
+		
+		playerScore = 0
 		
 		self.owSound = pygame.mixer.Sound('data/Music/ow.wav')
 		
