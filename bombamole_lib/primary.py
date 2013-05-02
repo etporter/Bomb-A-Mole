@@ -99,6 +99,8 @@ class cell:
 		self.bomb2 = pygame.image.load('bombfusehalf_final.png')
 		self.bomb3 = pygame.image.load('bombfuseshort.png')
 		
+		self.boomSound = pygame.mixer.Sound('data/Music/explosion.wav')
+		
 #		self.mole = pygame.image.load('mole_final.png')
 #		self.booming = pygame.image.load('boom.png')
 
@@ -194,6 +196,7 @@ class cell:
 			if self.kind == 4:
 # 				time.sleep(2)
 				boomAnim.play()
+				self.boomSound.play()
 # 				boomAnim.blit(game.screen,(self.x,self.y))
 				
 				blitX = self.x
@@ -231,22 +234,6 @@ class cell:
 # 				time.sleep(2)
 				self.image = self.crater
 
-
-# Basic Game Logic:
-
-# Level Lost:
-# 		Get user name
-# 			Save user name
-# 		Print score
-# 
-# 		Prompt user:
-# 			play again?
-# 			if answer == yes:
-# 				Enter game loop
-# 			elif:
-# 				Return main menu.
-
-# End game loop
 
 # the mole class:
 # (this class basically boils down to a tuple of two numbers, i.e. the mole's coordinates)

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Jim.0,Jim.30,Job bob the wave wrangler.0,Yolo.0,Jim.60,bill.60,Im a winner.0
+=======
+Jim.0,ethan.140,ethnwashere.60
+>>>>>>> 6f9c7b3588710302f428a3ac81a403a4659038f2
