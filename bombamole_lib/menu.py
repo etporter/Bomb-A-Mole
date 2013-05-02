@@ -3,7 +3,7 @@ from pygame import *
 font.init()
 
 from math import cos,radians
-import primary,high_score,instruction_window,pyganim
+import primary,highscore2,instruction_window,pyganim
 
         
 def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=None,interline=5,justify=True,light=5,speed=300,lag=30):
@@ -183,7 +183,7 @@ class run(object):
         if resp == 'HIGHSCORES':
             display.update(scr.blit(bg,r,r))
          #   resp = menu(**menu2)[0]
-            hs = high_score.hs()
+            hs = highscore2.hs()
             hs.run()
         #if resp == 'BACK':
         #   scr.blit(background_main,(0,0))

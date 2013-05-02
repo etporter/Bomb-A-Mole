@@ -12,12 +12,12 @@ class hs(object):
 		# set the window size:
 		dimensions=[1200,650]
 
-		font = pygame.font.Font(None, 48)
+		font = pygame.font.Font('data/FEASFBRG.ttf', 48)
 
 		screen=pygame.display.set_mode(dimensions)
 
 		# load the high score storage file:
-		file = open("High Score.txt", "r") 
+		file = open("data/HighScore.txt", "r") 
 
 		# read the file:
 		intext = file.read()
