@@ -542,7 +542,6 @@ class game:
 
 				highscorefile.write(self.a)
 
-				pygame.time.wait(500)
 				goBack = menu.run()
 				goBack.runm()
 				
