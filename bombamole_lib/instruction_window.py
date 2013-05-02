@@ -50,48 +50,48 @@ class instr(object):
                  
                         if instruction_page == 1:
                                 text=font.render("How to Play Bomb-A-Mole", True, white)
-                                screen.blit(text, [380, 200])
+                                screen.blit(text, [20, 200])
 
                         if instruction_page == 2:
-                                text=font.render("You are a farmer and moles are trying to take your carrots and cabbage", True, white)
+                                text=font.render("You are a farmer and moles are trying to take your carrots and cabbage.", True, white)
                                 screen.blit(text, [20, 200])
                                 screen.blit(carrotpic,(460, 500))
                                 screen.blit(cabbagepic,(610,500))
                                 
                         if instruction_page == 3:
-                                text=font.render("So you need to destroy them", True, white)
-                                screen.blit(text, [355, 200])
+                                text=font.render("So you need to destroy them...", True, white)
+                                screen.blit(text, [20, 200])
                                 screen.blit(molepic,(520,500))
 
                         if instruction_page == 4:
-                                text=font.render("With Bombs!", True, white)
-                                screen.blit(text, [455,200])
+                                text=font.render("With Bombs!  (Click to place bombs.)", True, white)
+                                screen.blit(text, [20, 200])
                                 screen.blit(bombpic,(520,500))
 
                         if instruction_page == 5:
-                                text=font.render("You have to destroy as many moles as you can", True, white)
-                                screen.blit(text, [235, 200])
-                                screen.blit(clockpic,(520,500))
+                                text=font.render("You have to destroy as many moles as you can.", True, white)
+                                screen.blit(text, [20, 200])
+#                                 screen.blit(clockpic,(520,500))
 
                         if instruction_page == 6:
-                                text=font.render("After every vegetable the mole moves 3 spaces", True, white)
-                                screen.blit(text, [220, 200])
-                                screen.blit(threepic,(520,500))
+                                text=font.render("The mole moves around underground, and eats every other turn.", True, white)
+                                screen.blit(text, [20, 200])
+#                                 screen.blit(threepic,(520,500))
 
                         if instruction_page == 7:
-                                text=font.render("Watch out because bombs also create craters which nothing can grow in", True, white)
-                                screen.blit(text, [8, 200])
+                                text=font.render("But remember that every vegetable you bomb is a vegetable you lose.", True, white)
+                                screen.blit(text, [20, 200])
                                 screen.blit(craterpic,(520,500))
 
                         if instruction_page == 8:
-                                text=font.render("Your score is based on how many moles you bomb", True, white)
-                                screen.blit(text, [220,100])
+                                text=font.render("Your score is based on how many moles you bomb.", True, white)
+                                screen.blit(text, [20, 100])
 
-                                text=font.render("The round is done when there is no more vegetables", True, white)
-                                screen.blit(text, [203,300])
+                                text=font.render("You get a higher score the more veggies you have when you kill it.", True, white)
+                                screen.blit(text, [20, 200])
 
-                                text=font.render("So Bomb-A-Mole and save your garden!", True, white)
-                                screen.blit(text, [288,500])
+                                text=font.render("The game is done when there are no more vegetables.", True, white)
+                                screen.blit(text, [20, 300])
 
 
                         clock.tick(5)
