@@ -7,7 +7,7 @@ pygame.init()
 
 SCORES = "scores.pickle"
 
-global veggieTotal, playerScore, blitX, blitY, blitmX,blitmY
+global veggieTotal, playerScore, blitX, blitY, blitmX, blitmY
 
 blitX = 10
 blitY = 10
@@ -199,13 +199,16 @@ class cell:
 	def eaten(self,count):
 	
 # 	the mole eats every other turn
-                global blitmX,blitmY
+		global blitmX,blitmY, veggieTotal
+		
 		self.moleTicker = count
 		if self.moleTicker == 2:
 #			self.image = self.mole
 # 			print 'Veggie eaten!'
 			
-			global veggieTotal
+			moleAnim.play()
+			blitmX = self.x
+			blitmY = self.y
 			
 			veggieTotal -= 1
 			
@@ -213,9 +216,9 @@ class cell:
 			
 			self.kind = 4
 			if self.kind == 4:
-                                moleAnim.play()
-                                blitmX = self.x
-                                blitmY = self.y
+# 				moleAnim.play()
+# 				blitmX = self.x
+# 				blitmY = self.y
                                 
 # 				time.sleep(2)
 				self.image = self.crater
@@ -526,10 +529,11 @@ class game:
 				goBack = menu.run()
 				goBack.runm()
 				
-        def animationBlitm(self,x,y):
-                self.blitmX = x-40
-                self.blitmY = y-40
-                moleAnim.blit(self.screen, (self.blitmX,self.blitmY))
+	def animationBlitm(self,x,y):
+		self.blitmX = x-40
+		self.blitmY = y-40
+		moleAnim.blit(self.screen,(self.blitmX,self.blitmY))
+
 	def animationBlit(self,x,y):
 		self.blitX = x-80
 		self.blitY = y-80
