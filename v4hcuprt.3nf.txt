@@ -1,0 +1,34 @@
+﻿Merge branch 'master' of https://github.com/etporter/Bomb-A-Mole
+
+Conflicts:
+	data/HighScore.txt
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 4 different commits each, respectively.
+#
+# All conflicts fixed but you are still merging.
+#   (use "git commit" to conclude merge)
+#
+# Changes to be committed:
+#
+#	deleted:    bombamole_lib/HighScore.txt
+#	deleted:    bombamole_lib/__init__.pyc
+#	modified:   bombamole_lib/highscore2.pyc
+#	modified:   bombamole_lib/menu.pyc
+#	modified:   bombamole_lib/primary.py
+#	modified:   bombamole_lib/primary.pyc
+#	modified:   data/HighScore.txt
+#	modified:   data/Music/Munching noise.wav
+#	modified:   data/Music/explosion.wav
+#	modified:   data/Music/taunt.wav
+#
+
