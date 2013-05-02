@@ -59,8 +59,12 @@ class hs(object):
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					sys.exit()
+                                if event.type == pygame.MOUSEBUTTONDOWN:
+                                        mymenu = menu.run()
+                                        mymenu.runm()
 
 			pygame.display.flip()
+		
 
 if __name__ == "__main__":
 	begin = hs()

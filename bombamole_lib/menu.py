@@ -182,14 +182,11 @@ class run(object):
             instr.run()
         if resp == 'HIGHSCORES':
             display.update(scr.blit(bg,r,r))
-         #   resp = menu(**menu2)[0]
-            hs = highscore2.hs()
-            hs.run()
-            resp = menu(**menu2)[0]
-        #if resp == 'BACK':
-        #   scr.blit(background_main,(0,0))
-        #   display.update(scr.blit(f.render('Bomb A Mole!',1,(255,255,255)),(185,120)))
-        #   resp = menu(**menu1)[0]
+            highscores = highscore2.hs()
+            highscores.run()
+        if resp == 'BACK':
+           scr.blit(background_main,(0,0))
+           resp = menu(**menu1)[0]
        
             
         
