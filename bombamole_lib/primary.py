@@ -12,8 +12,6 @@ global veggieTotal, playerScore
 veggieTotal = 36
 playerScore = 0
 
-clock = pygame.time.Clock()
-
 # this creates the image for the cursor as ascii art:
 
 thickarrow_strings = (               #sized 24x24
@@ -180,6 +178,8 @@ class cell:
 			self.kind = 4
 			if self.kind == 4:
 # 				time.sleep(2)
+				boomAnim.play()
+# 				boomAnim.blit(game.screen,(self.x,self.y))
 				self.image = self.crater
 			
 # 			Method for the vegetable being eaten:
@@ -430,6 +430,9 @@ class game:
 		
 		self.mole = mole()
 		
+		self.cellXblit = 10
+		self.cellYblit = 10		
+		
 # 		primary game loop:
 		
 		while 1:
@@ -447,8 +450,7 @@ class game:
 					if self.clickCount < 2:
 						self.clickCount += 1
 					else:
-						self.clickCount = 0
-					
+						self.clickCount = 0		
 
 					for i in self.cells:
 # 						if i.bombTicker 
@@ -458,9 +460,11 @@ class game:
 						cell.placeBomb(i,self.mX,self.mY)
 						if i.kind == 3:
 							cell.boom(i,i.bombTicker)
-							if i.kind == 4:
-                                                                boomAnim.play()
-                                                                boomAnim.blit(self.screen,(1000,120))
+							self.cellXblit = i.x
+							self.cellYblit = i.y
+# 						if i.kind == 4:
+# 							boomAnim.play()
+# 							boomAnim.blit(self.screen,(i.x,i.y))
 							
 					
 					mole.move(self.mole,self.cells)
@@ -491,6 +495,8 @@ class game:
 
 			self.moleCell = cell(self.moleSquare,880,120)
 			
+			self.animationBlit(self.cellXblit,self.cellYblit)
+			
 			self.screen.blit(self.moleCell.image,self.moleCell.disp)
 			pygame.display.flip()
 			self.screen.blit(self.garden,self.gardenDisp)
@@ -498,12 +504,16 @@ class game:
 			if veggieTotal == 0:
 				print 'Game over'
 				print 'Score:', playerScore
-				#record = hs.main()
-				#record.run()
+				record = hs.main()
+				record.run()
 				pygame.time.wait(500)
 				goBack = menu.run()
 				goBack.runm()
-		
+				
+	def animationBlit(self,x,y):
+		self.blitX = x-80
+		self.blitY = y-80
+		boomAnim.blit(self.screen,(self.blitX,self.blitY))	
 
 if __name__ == "__main__" :
         play = game()
