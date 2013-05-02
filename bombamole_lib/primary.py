@@ -7,7 +7,7 @@ pygame.init()
 
 SCORES = "scores.pickle"
 
-global veggieTotal, playerScore, blitX, blitY, blitmX, blitmY
+global veggieTotal, playerScore, blitX, blitY, blitmX, blitmY, highscorefile
 
 blitX = 10
 blitY = 10
@@ -16,6 +16,8 @@ blitmY = 10
 
 veggieTotal = 36
 playerScore = 0
+
+highscorefile = open("data/HighScore.txt", "a")
 
 # this creates the image for the cursor as ascii art:
 
@@ -433,7 +435,7 @@ class mole:
 class game:
 	def __init__(self):
 	
-		global veggieTotal, playerScore, blitX, blitY
+		global veggieTotal, playerScore, blitX, blitY, highscorefile
 	
 # 	set the screen size:
 	
@@ -530,8 +532,16 @@ class game:
 			if veggieTotal == 0:
 				print 'Game over'
 				print 'Score:', playerScore
-				record = hs.main()
-				record.run()
+# 				record = hs.main()
+# 				record.run()
+
+				self.textToWrite = raw_input('Please type a username to save your score: ')
+				self.a = ','+self.textToWrite+'.'+str(playerScore)
+
+				print self.a
+
+				highscorefile.write(self.a)
+
 				pygame.time.wait(500)
 				goBack = menu.run()
 				goBack.runm()
