@@ -582,6 +582,8 @@ class game:
 				goBack = menu.run()
 				goBack.runm()
 				
+				file.close()
+				
 	def animationBlitm(self,x,y):
 		self.blitmX = x-40
 		self.blitmY = y-40

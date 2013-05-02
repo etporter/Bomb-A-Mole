@@ -65,6 +65,8 @@ class hs(object):
                                         mymenu.runm()
 
 			pygame.display.flip()
+			
+			file.close()
 		
 
 if __name__ == "__main__":
