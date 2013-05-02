@@ -85,7 +85,7 @@ class cell:
 
 		self.carrot = pygame.image.load('carrot_final.png')
 		self.cabbage = pygame.image.load('cabbage_final.png')
-		self.crater = pygame.image.load('crater_final.png')
+		self.crater = pygame.image.load('crater_final.gif')
 		
 		self.bomb = pygame.image.load('bombfusefull_final.png')
 		self.bomb2 = pygame.image.load('bombfusehalf_final.png')
