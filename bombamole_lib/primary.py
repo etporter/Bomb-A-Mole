@@ -7,7 +7,7 @@ pygame.init()
 
 SCORES = "scores.pickle"
 
-global veggieTotal, playerScoreg, blitX, blitY, blitmX,blitmY
+global veggieTotal, playerScore, blitX, blitY, blitmX,blitmY
 
 blitX = 10
 blitY = 10
@@ -529,6 +529,7 @@ class game:
         def animationBlitm(self,x,y):
                 self.blitmX = x-40
                 self.blitmY = y-40
+                moleAnim.blit(self.screen, (self.blitmX,self.blitmY))
 	def animationBlit(self,x,y):
 		self.blitX = x-80
 		self.blitY = y-80
