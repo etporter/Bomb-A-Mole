@@ -33,7 +33,7 @@ class instr(object):
                 bombpic = pygame.image.load ('bombfusefull_final.png')
                 clockpic = pygame.image.load('clock_final.png')
                 threepic = pygame.image.load('three_final.png')
-                craterpic = pygame.image.load('crater_final.png')
+                craterpic = pygame.image.load('data/mole_animation_1.gif')
 
 
                 while done==False and display_instructions:
