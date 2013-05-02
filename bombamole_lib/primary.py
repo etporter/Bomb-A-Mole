@@ -101,6 +101,9 @@ class cell:
 		self.bomb2 = pygame.image.load('bombfusehalf_final.png')
 		self.bomb3 = pygame.image.load('bombfuseshort.png')
 		
+		self.boomSound = pygame.mixer.Sound('data/Music/explosion.wav')
+		self.munchSound = pygame.mixer.Sound('data/Music/Munching noise.wav')
+		
 #		self.mole = pygame.image.load('mole_final.png')
 #		self.booming = pygame.image.load('boom.png')
 
@@ -198,6 +201,8 @@ class cell:
 				boomAnim.play()
 # 				boomAnim.blit(game.screen,(self.x,self.y))
 				
+				self.boomSound.play()
+				
 				blitX = self.x
 				blitY = self.y
 
@@ -233,6 +238,8 @@ class cell:
 # 				moleAnim.play()
 # 				blitmX = self.x
 # 				blitmY = self.y
+				
+				self.munchSound.play()
                                 
 # 				time.sleep(2)
 				self.image = self.crater
