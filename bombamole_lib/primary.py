@@ -1,7 +1,7 @@
 from pygame.locals import *
 import time,math,random,pygame,sys,os
 import menu
-import pyganim,cPickle,datetime,hs
+import pyganim,cPickle,datetime,hs,uinput
 
 pygame.init()
 
@@ -570,7 +570,8 @@ class game:
 				print 'Score:', playerScore
 # 				record = hs.main()
 # 				record.run()
-
+                                getinput = uinput.main()
+                                getinput.run()
 				game.textToWrite = raw_input('Please type a username to save your score: ')
 				game.a = ','+self.textToWrite+'.'+str(playerScore)
 
