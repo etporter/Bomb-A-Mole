@@ -7,7 +7,7 @@ pygame.init()
 
 SCORES = "scores.pickle"
 
-global veggieTotal, playerScoreg, blitX, blitY
+global veggieTotal, playerScoreg, blitX, blitY, blitmX,blitmY
 
 blitX = 10
 blitY = 10
