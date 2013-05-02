@@ -511,6 +511,7 @@ class game:
 			
 # 			self.animationBlit(self.cellXblit,self.cellYblit)
 			self.animationBlit(blitX,blitY)
+			self.animationBlitm(blitmX,blitmY)
 			
 			self.screen.blit(self.moleCell.image,self.moleCell.disp)
 			pygame.display.flip()
