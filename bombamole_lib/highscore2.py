@@ -1,7 +1,8 @@
 """
 This is a program for displaying the user's high scores.
 """
-import sys, pygame,menu
+import menu
+import sys, pygame
  
 pygame.init() 
 

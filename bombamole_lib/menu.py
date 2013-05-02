@@ -158,7 +158,7 @@ class run(object):
         scr.blit(mainmenu,r)
         display.flip()
         
-        menu1 = {"menu":['PLAY','HIGHSCORES','INSTRUCTIONS','EXIT'],"font1":f1,"pos":(800,225),"color1":(154,180,61),"light":6,"speed":200,"lag":20}
+        menu1 = {"menu":['PLAY','HIGHSCORES','INSTRUCTIONS'],"font1":f1,"pos":(800,225),"color1":(154,180,61),"light":6,"speed":200,"lag":20}
 
         menus = (menu1)
         playlist = [menu1]
