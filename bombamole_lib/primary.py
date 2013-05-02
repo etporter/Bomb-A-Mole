@@ -472,6 +472,9 @@ class game:
 		self.moleLabel = self.font.render('Mole is hiding under:', True, [255,255,255])
 		self.screen.blit(self.moleLabel, [760,60])
 		
+# 		self.scoreLabel = self.font.render('Score: '+str(playerScore), True, [255,255,255])
+# 		self.screen.blit(self.scoreLabel, [760,360])
+		
 # 		initialize the mole object:
 		
 		self.mole = mole()
@@ -547,9 +550,20 @@ class game:
 			self.animationBlitm(blitmX,blitmY)
 			self.animationBlitd(blitdX,blitdY)
 			
+			self.blackImage = pygame.image.load('data/black.png')
+			
+			self.blackBox = self.blackImage.get_rect(center = (740,340))
+			self.screen.blit(self.blackImage, self.blackBox)
+			
+			self.scoreLabel = self.font.render('Score: '+str(playerScore), True, [255,255,255])
+			self.screen.blit(self.scoreLabel, [760,360])
+			
 			self.screen.blit(self.moleCell.image,self.moleCell.disp)
 			pygame.display.flip()
 			self.screen.blit(self.garden,self.gardenDisp)
+			
+# 			self.black = (0,0,0)
+# 			self.screen.fill(self.black)
 			
 			if veggieTotal == 0:
 				print 'Game over'
