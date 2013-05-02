@@ -5,9 +5,8 @@ import pyganim,cPickle,datetime,hs
 
 pygame.init()
 
-SCORES = "scores.pickle"
 
-global veggieTotal, playerScore, blitX, blitY, blitmX, blitmY
+global veggieTotal, playerScore, blitX, blitY, blitmX, blitmY, highscorefile
 
 blitX = 10
 blitY = 10
@@ -16,6 +15,8 @@ blitmY = 10
 
 veggieTotal = 36
 playerScore = 0
+
+file = open("data/HighScore.txt", "a")
 
 # this creates the image for the cursor as ascii art:
 
@@ -440,8 +441,6 @@ class game:
 		self.size = 1200, 650
 		game.screen = pygame.display.set_mode((self.size),0,32)
 		
-		self.highscorefile = open("HighScore.txt", "a")
-		
 # 		create the grid of cells:
 		
 		self.cells = [cell(random.randint(1,2),120,120),cell(random.randint(1,2),201,120),cell(random.randint(1,2),282,120),cell(random.randint(1,2),363,120),cell(random.randint(1,2),444,120),cell(random.randint(1,2),525,120),cell(random.randint(1,2),120,201),cell(random.randint(1,2),201,201),cell(random.randint(1,2),282,201),cell(random.randint(1,2),363,201),cell(random.randint(1,2),444,201),cell(random.randint(1,2),525,201),cell(random.randint(1,2),120,282),cell(random.randint(1,2),201,282),cell(random.randint(1,2),282,282),cell(random.randint(1,2),363,282),cell(random.randint(1,2),444,282),cell(random.randint(1,2),525,282),cell(random.randint(1,2),120,363),cell(random.randint(1,2),201,363),cell(random.randint(1,2),282,363),cell(random.randint(1,2),363,363),cell(random.randint(1,2),444,363),cell(random.randint(1,2),525,363),cell(random.randint(1,2),120,444),cell(random.randint(1,2),201,444),cell(random.randint(1,2),282,444),cell(random.randint(1,2),363,444),cell(random.randint(1,2),444,444),cell(random.randint(1,2),525,444),cell(random.randint(1,2),120,525),cell(random.randint(1,2),201,525),cell(random.randint(1,2),282,525),cell(random.randint(1,2),363,525),cell(random.randint(1,2),444,525),cell(random.randint(1,2),525,525)]
@@ -535,12 +534,12 @@ class game:
 # 				record = hs.main()
 # 				record.run()
 
-				self.textToWrite = raw_input('Please type a username to save your score: ')
-				self.a = ','+self.textToWrite+'.'+str(playerScore)
+				game.textToWrite = raw_input('Please type a username to save your score: ')
+				game.a = ','+self.textToWrite+'.'+str(playerScore)
 
 				print self.a
 
-				self.highscorefile.write(self.a)
+				file.write(self.a)
 
 				goBack = menu.run()
 				goBack.runm()
