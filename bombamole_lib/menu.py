@@ -185,6 +185,7 @@ class run(object):
          #   resp = menu(**menu2)[0]
             hs = highscore2.hs()
             hs.run()
+            resp = menu(**menu2)[0]
         #if resp == 'BACK':
         #   scr.blit(background_main,(0,0))
         #   display.update(scr.blit(f.render('Bomb A Mole!',1,(255,255,255)),(185,120)))

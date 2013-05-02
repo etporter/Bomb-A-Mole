@@ -37,88 +37,21 @@ class hs(object):
 
 		secondText = sorted(secondText, key = lambda i: int(i[1]), reverse = True)
 
-		if len(secondText) > 12 and len(secondText) < 24:
-			text1 = secondText[0:12]
-			text2 = secondText[12:]
-			
-			for i in text1:
-		# 		print i
+		
+                text1 = secondText[:10]
+                
+                for i in text1:
+        # 		print i
 
-				iIndex = text1.index(i)
-				
-				j = str(i)
-			
-				k = j[1:-1]
-			
-				l = font.render(str(k), True, [255,255,255])
-				screen.blit(l, [50, ((iIndex+1)*50)-10])
-				
-			for i in text2:
-		# 		print i
+                        iIndex = text1.index(i)
+                        
+                        j = str(i)
+                
+                        k = str(iIndex+1)+'. '+str(j[1:-1])
+                
+                        l = font.render(str(k), True, [255,255,255])
+                        screen.blit(l, [50, ((iIndex+1)*50)-10])
 
-				iIndex = text2.index(i)
-			
-				j = str(i)
-			
-				k = j[1:-1]
-			
-				l = font.render(str(k), True, [255,255,255])
-				screen.blit(l, [450, ((iIndex+1)*50)-10])
-				
-		elif len(secondText) > 24:
-			text1 = secondText[0:12]
-			text2 = secondText[12:24]
-			text3 = secondText[24:]
-			
-			for i in text1:
-		# 		print i
-
-				iIndex = text1.index(i)
-				
-				j = str(i)
-			
-				k = j[1:-1]
-			
-				l = font.render(str(k), True, [255,255,255])
-				screen.blit(l, [50, ((iIndex+1)*50)-10])
-				
-			for i in text2:
-		# 		print i
-
-				iIndex = text2.index(i)
-			
-				j = str(i)
-			
-				k = j[1:-1]
-			
-				l = font.render(str(k), True, [255,255,255])
-				screen.blit(l, [450, ((iIndex+1)*50)-10])
-				
-			for i in text3:
-		# 		print i
-
-				iIndex = text3.index(i)
-			
-				j = str(i)
-			
-				k = j[1:-1]
-			
-				l = font.render(str(k), True, [255,255,255])
-				screen.blit(l, [800, ((iIndex+1)*50)-10])
-
-		else:
-		# For each item in the list of high scores, blit at a different y coordinate:
-			for i in secondText:
-		# 		print i
-
-				iIndex = secondText.index(i)
-			
-				j = str(i)
-			
-				k = j[1:-1]
-			
-				l = font.render(str(k), True, [255,255,255])
-				screen.blit(l, [50, ((iIndex+1)*50)-10])
 
 		# main loop:
 		while 1:
