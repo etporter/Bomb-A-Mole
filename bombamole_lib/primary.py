@@ -7,7 +7,10 @@ pygame.init()
 
 SCORES = "scores.pickle"
 
-global veggieTotal, playerScore
+global veggieTotal, playerScoreg, blitX, blitY
+
+blitX = 10
+blitY = 10
 
 veggieTotal = 36
 playerScore = 0
@@ -160,6 +163,8 @@ class cell:
 	
 	def boom(self,count):
 		
+		global blitX,blitY
+		
 # 		pass in the bomb count
 		
 		self.bombTicker = count
@@ -180,6 +185,10 @@ class cell:
 # 				time.sleep(2)
 				boomAnim.play()
 # 				boomAnim.blit(game.screen,(self.x,self.y))
+				
+				blitX = self.x
+				blitY = self.y
+
 				self.image = self.crater
 			
 # 			Method for the vegetable being eaten:
@@ -409,7 +418,7 @@ class mole:
 class game:
 	def __init__(self):
 	
-		global veggieTotal, playerScore
+		global veggieTotal, playerScore, blitX, blitY
 	
 # 	set the screen size:
 	
@@ -460,8 +469,8 @@ class game:
 						cell.placeBomb(i,self.mX,self.mY)
 						if i.kind == 3:
 							cell.boom(i,i.bombTicker)
-							self.cellXblit = i.x
-							self.cellYblit = i.y
+# 							self.cellXblit = i.x
+# 							self.cellYblit = i.y
 # 						if i.kind == 4:
 # 							boomAnim.play()
 # 							boomAnim.blit(self.screen,(i.x,i.y))
@@ -495,7 +504,8 @@ class game:
 
 			self.moleCell = cell(self.moleSquare,880,120)
 			
-			self.animationBlit(self.cellXblit,self.cellYblit)
+# 			self.animationBlit(self.cellXblit,self.cellYblit)
+			self.animationBlit(blitX,blitY)
 			
 			self.screen.blit(self.moleCell.image,self.moleCell.disp)
 			pygame.display.flip()
