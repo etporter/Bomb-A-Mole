@@ -66,6 +66,13 @@ moleAnim = pyganim.PygAnimation([('data/mole_animation_1.gif', 0.1),
                                  ('data/mole_animation_12.gif', 0.1),
                                  ('data/mole_animation_13.gif', 0.1)],loop=False)
 
+deadMole = pyganim.PygAnimation([('data/mole_crispy-animation_1.gif', 0.1),
+                                 ('data/mole_crispy-animation_2.gif', 0.1),
+                                 ('data/mole_crispy-animation_3.gif', 0.1),
+                                 ('data/mole_crispy-animation_4.gif', 0.1),
+                                 ('data/mole_crispy-animation_5.gif', 0.1),
+                                 ('data/mole_crispy-animation_6.gif', 0.1),
+                                 ('data/mole_crispy-animation_7.gif', 0.1)],loop=False)
 # compiles the cursor from ascii art:
 
 mousecursor = pygame.cursors.compile(thickarrow_strings, black='X', white='.', xor='o')
