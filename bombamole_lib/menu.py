@@ -6,16 +6,16 @@ from math import cos,radians
 import primary,highscore2,instruction_window,pyganim
 
         
-def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=None,interline=5,justify=True,light=5,speed=300,lag=30):
+def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=None,interline=5,justify=True,light=5,speed=300,lag=30): #menu function that draws all the surfaces & defines modules for later use in the main() function
    
 
-    class Item(Rect):
+    class Item(Rect):   #defines the pygame surface for blitting
 
         def __init__(self,menu,label):
             Rect.__init__(self,menu)
             self.label = label
                 
-    def show():
+    def show():     #renders the beginning of the animation on the left hand side of the screen
         i = Rect((0,0),font2.size(menu[idx].label))
         if justify: i.center = menu[idx].center 
         else: i.midleft = menu[idx].midleft
@@ -29,7 +29,7 @@ def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=Non
         
         return r
         
-    def anim():
+    def anim():     #animates the menu options for cross screen movement
         clk = time.Clock()
         a = [menu[0]] if lag else menu[:]
         c = 0
@@ -58,7 +58,7 @@ def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=Non
             clk.tick(speed)
         
     
-    events = event.get()
+    events = event.get()            #defines variables for use with main menu definition and fonts, as well as some orientation work
     scr = display.get_surface()
     scrrect = scr.get_rect()
     bg = scr.copy()
@@ -101,7 +101,7 @@ def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=Non
     idx = -1
     display.set_caption("Bomb A Mole!")
     
-    while True:
+    while True:             #main loop for menu animation and blitting on the pygame surfaces, Also allows use with the keyboard in closing and menu selection
         
         ev = event.wait()
         if ev.type == MOUSEMOTION:
@@ -135,7 +135,7 @@ def menu(menu,pos='center',font1=None,font2=None,color1=(128,128,128),color2=Non
     
     for ev in events: event.post(ev)
     return ret
-class run(object):
+class run(object):                  #main function of the menu
     #if __name__ == '__main__':
 
     def runm(self):
@@ -143,7 +143,7 @@ class run(object):
         time.Clock()
         from os.path import dirname,join
        
-        here = dirname(__file__)
+        here = dirname(__file__)            #importing fonts and rendering the background
         scr = display.set_mode((1200,650))
         print(menu.__doc__)
         f = font.Font(join('data/FEASFBRG.ttf'),45)
@@ -158,17 +158,17 @@ class run(object):
         scr.blit(mainmenu,r)
         display.flip()
         
-        menu1 = {"menu":['PLAY','HIGHSCORES','INSTRUCTIONS'],"font1":f1,"pos":(800,225),"color1":(154,180,61),"light":6,"speed":200,"lag":20}
+        menu1 = {"menu":['PLAY','HIGHSCORES','INSTRUCTIONS'],"font1":f1,"pos":(800,225),"color1":(154,180,61),"light":6,"speed":200,"lag":20}  #defines the main menu and what options are available
 
-        menus = (menu1)
+        menus = (menu1)     #these two lines are for if we want to implement different menus, such as making the high score menu a second menu, so that we can just cycle through them
         playlist = [menu1]
         
         resp = "re-show"
         while resp == "re-show":
             resp = menu(**menu1)[0]
+                                #These define what each button will do, and how to react with user input
         
-        
-        if resp == 'PLAY':
+        if resp == 'PLAY':      
             display.update(scr.blit(bg,r,r))
             moleGame = primary.game()
             moleGame.run()
@@ -185,7 +185,7 @@ class run(object):
             
         
 
-if __name__ == "__main__" :
+if __name__ == "__main__" : #if called, the menu will use the run() function
     
     mymenu = run()    
     mymenu.runm()

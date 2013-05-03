@@ -2,8 +2,8 @@ import pygame, pygame.font, pygame.event, pygame.draw, string
 from pygame.locals import *
 import primary,menu
 
-file = open("data/HighScore.txt","a")
-def get_key():
+file = open("data/HighScore.txt","a") #opens high score text file & equates it to var file
+def get_key():            #reads the users keys as they type into the input box
   while 1:
     event = pygame.event.poll()
     if event.type == KEYDOWN:
@@ -11,7 +11,7 @@ def get_key():
     else:
       pass
 
-def display_box(screen, message):
+def display_box(screen, message):     #initializes & displays the input box as a new screen in pygame
   "Print a message in a box in the middle of the screen"
   fontobject = pygame.font.Font(None,18)
   pygame.draw.rect(screen, (0,0,0),
@@ -27,7 +27,7 @@ def display_box(screen, message):
                 ((screen.get_width() / 2) - 100, (screen.get_height() / 2) - 10))
   pygame.display.flip()
 
-def ask(screen, question):
+def ask(screen, question):          #writes the text to the input box, prompting the user for input
   "ask(screen, question) -> answer"
   pygame.font.init()
   current_string = []
@@ -45,7 +45,7 @@ def ask(screen, question):
     display_box(screen, question + ": " + string.join(current_string,""))
   return string.join(current_string,"")
 
-def main():
+def main():             #initializes display, defines value for ask module, and writes to the high score file
   screen = pygame.display.set_mode((1200,650))
   main.scoring = ask(screen, "Enter Username")
   main.a = ','+main.scoring+'.'+str(primary.playerScore)
