@@ -47,7 +47,11 @@ thickarrow_strings = (               #sized 24x24
 "    X..XXXX..XXXX..X    ",
 "     XX..........XX     ",
 "       XXXXXXXXXX       ")
+
+# setup a clock for the animations:
 mainClock = pygame.time.Clock()
+
+# define the frames and frame display time for the explosion animation:
 boomAnim = pyganim.PygAnimation([('data/kaboom_frame2.png', 0.1),
                                 ('data/kaboom_frame3.png', 0.1),
                                 ('data/kaboom_frame4.png', 0.1),
@@ -55,6 +59,7 @@ boomAnim = pyganim.PygAnimation([('data/kaboom_frame2.png', 0.1),
                                 ('data/kaboom_frame6.png', 0.1),
                                 ('data/kaboom_frame7.png', 0.1)], loop=False)
 
+# define the frames and frame display time for the mole eating animation:
 moleAnim = pyganim.PygAnimation([('data/mole_animation_1.gif', 0.1),
                                  ('data/mole_animation_2.gif', 0.1),
                                  ('data/mole_animation_3.gif', 0.1),
@@ -69,30 +74,30 @@ moleAnim = pyganim.PygAnimation([('data/mole_animation_1.gif', 0.1),
                                  ('data/mole_animation_12.gif', 0.1),
                                  ('data/mole_animation_13.gif', 0.1)],loop=False)
 
-deadMole = pyganim.PygAnimation([('data/mole_crispy-animation_1.gif', 0.1),
+# define the frames and frame display time for the burned mole animation:
+deadMole = pyganim.PygAnimation([('data/mole_crispy-animation_6.gif', 0.1),
+                                 ('data/mole_crispy-animation_1.gif', 0.1),
                                  ('data/mole_crispy-animation_2.gif', 0.1),
+                                 ('data/mole_crispy-animation_3.gif', 0.1),
+                                 ('data/mole_crispy-animation_4.gif', 0.1),
+                                 ('data/mole_crispy-animation_5.gif', 0.1),
                                  ('data/mole_crispy-animation_3.gif', 0.1),
                                  ('data/mole_crispy-animation_4.gif', 0.1),
                                  ('data/mole_crispy-animation_5.gif', 0.1),
                                  ('data/mole_crispy-animation_6.gif', 0.1),
                                  ('data/mole_crispy-animation_7.gif', 0.1)],loop=False)
-# compiles the cursor from ascii art:
 
+# compiles the cursor from ascii art:
 mousecursor = pygame.cursors.compile(thickarrow_strings, black='X', white='.', xor='o')
 
 # defines cursor size:
-
 cursorsize = [24,24]
 
-# objects/classes:
-
-# Object to create grid from:
-
+# Class to create grid from:
 class cell:
 	def __init__(self,type,xCoord,yCoord):
 
-# Load in the images:
-
+# Load in the images and sounds:
 		self.carrot = pygame.image.load('carrot_final.png')
 		self.cabbage = pygame.image.load('cabbage_final.png')
 		self.crater = pygame.image.load('crater_final.gif')
@@ -103,23 +108,17 @@ class cell:
 		
 		self.boomSound = pygame.mixer.Sound('data/Music/explosion.wav')
 		self.munchSound = pygame.mixer.Sound('data/Music/Munching noise.wav')
-		
-#		self.mole = pygame.image.load('mole_final.png')
-#		self.booming = pygame.image.load('boom.png')
 
 # pass in the arguments:
-
 		self.kind = type
 		
 		self.x = xCoord
 		self.y = yCoord
 		
 # set the bomb timer variable:
-		
 		self.bombTicker = 0
 		
 # set the image bases on self.kind:
-		
 		if self.kind == 1:
 			self.image = self.carrot
 		elif self.kind == 2:
@@ -130,77 +129,53 @@ class cell:
 			self.image = self.crater
 		
 # Set up the display for self:
-		
 		self.disp = self.image.get_rect(center = (self.x,self.y))
 
 # define the bomb placing method		
-
 	def placeBomb(self,mouseX,mouseY):
-# 		print 'Bomb placed!'
-# 		if playerTurn = True:
-# 		self.mouseLoc = pygame.mouse.get_pos()
-# 		self.mouseX = self.mouseLoc[0]
-# 		self.mouseY = self.mouseLoc[1]
 		
 		global veggieTotal
 		
 # Pass in the arguments:
-		
 		self.mouseX = mouseX
 		self.mouseY = mouseY
-
-# 		print self.mouseX, self.mouseY
 		
-# 		check to see if the user clicked inside the cell
-		
+# check to see if the user clicked inside the cell	
 		if abs(self.x - self.mouseX) <= 40 and abs(self.y - self.mouseY) <= 40:
-
-# 			print 'placeBomb if sequence activated!'
-# 			print self.mouseX, self.mouseY
-
-# 			print 'Bomb placed!'
 	
-# 	set the cell's bomb ticker to 0
-	
+# set the cell's bomb ticker to 0
 			self.bombTicker = 0
 			
-# 	change the cell to a bomb, both in type and display
-# 	lower the vegetable count by one if the cell is a vegetable.
-			
+# change the cell to a bomb, both in type and display
+# lower the vegetable count by one if the cell is a vegetable.
 			if self.kind == 1 or self.kind == 2:
 				veggieTotal -= 1
 			self.kind = 3
 			self.image = self.bomb
-			
-# 			print 'Veggies:', veggieTotal
 	
-# 	define a method for the bomb exploding:
-	
+# define a method for the bomb exploding:
 	def boom(self,count):
 		
 		global blitX,blitY,blitdX,blitdY
 		
-# 		pass in the bomb count
-		
+# pass in the bomb count
 		self.bombTicker = count
 		
-# 		the image changes as the bomb counts down:
-		
+# the image changes as the bomb counts down:
 		if self.bombTicker == 1:
 			self.image = self.bomb2
 		
 		elif self.bombTicker == 2:
 			self.image = self.bomb3
 		
-# 		at 3, the bomb explodes
-		
+# at 3, the bomb explodes
 		elif self.bombTicker == 3:
 			self.kind = 4
 			if self.kind == 4:
-# 				time.sleep(2)
+
 				boomAnim.play()
-# 				boomAnim.blit(game.screen,(self.x,self.y))
 				
+# play the explosion sound:
 				self.boomSound.play()
 				
 				blitX = self.x
@@ -214,54 +189,31 @@ class cell:
                         self.image = self.crater
                         self.kind = 4
 			
-# 			Method for the vegetable being eaten:
-# 			(I found it was easier to have the cell decide if it's been eaten, than have the mole decide)
+# Method for the vegetable being eaten:
+# (I found it was easier to have the cell decide if it's been eaten, than have the mole decide)
 			
 	def eaten(self,count):
 	
-# 	the mole eats every other turn
+# the mole eats every other turn
 		global blitmX,blitmY, veggieTotal
 		
 		self.moleTicker = count
 		if self.moleTicker == 2:
-#			self.image = self.mole
-# 			print 'Veggie eaten!'
 			
+# play the mol animation:
 			moleAnim.play()
 			blitmX = self.x
 			blitmY = self.y
 			
+# lower the veggie count:			
 			veggieTotal -= 1
-			
-# 			print 'Veggies:', veggieTotal
 			
 			self.kind = 4
 			if self.kind == 4:
-# 				moleAnim.play()
-# 				blitmX = self.x
-# 				blitmY = self.y
 				
 				self.munchSound.play()
                                 
-# 				time.sleep(2)
 				self.image = self.crater
-
-
-# Basic Game Logic:
-
-# Level Lost:
-# 		Get user name
-# 			Save user name
-# 		Print score
-# 
-# 		Prompt user:
-# 			play again?
-# 			if answer == yes:
-# 				Enter game loop
-# 			elif:
-# 				Return main menu.
-
-# End game loop
 
 # the mole class:
 # (this class basically boils down to a tuple of two numbers, i.e. the mole's coordinates)
@@ -549,16 +501,18 @@ class game:
 
 			self.moleCell = cell(self.moleSquare,880,160)
 			
-# 			self.animationBlit(self.cellXblit,self.cellYblit)
+# blit the animations:
 			self.animationBlit(blitX,blitY)
 			self.animationBlitm(blitmX,blitmY)
 			self.animationBlitd(blitdX,blitdY)
 			
+# set up a background for the score display:
 			self.blackImage = pygame.image.load('data/black.png')
 			
-			self.blackBox = self.blackImage.get_rect(center = (740,340))
+			self.blackBox = self.blackImage.get_rect(center = (780,360))
 			self.screen.blit(self.blackImage, self.blackBox)
 			
+# set up the score display:
 			self.scoreLabel = self.font.render('Score: '+str(playerScore), True, [255,255,255])
 			self.screen.blit(self.scoreLabel, [760,360])
 			
@@ -566,14 +520,10 @@ class game:
 			pygame.display.flip()
 			self.screen.blit(self.garden,self.gardenDisp)
 			
-# 			self.black = (0,0,0)
-# 			self.screen.fill(self.black)
-			
+# game end logic:
 			if veggieTotal == 0:
 				print 'Game over'
 				print 'Score:', playerScore
-# 				record = hs.main()
-# 				record.run()
                                 getinput = uinput.main()
                                 getinput.run()
 				game.textToWrite = raw_input('Please type a username to save your score: ')
@@ -585,11 +535,13 @@ class game:
 
 				goBack = menu.run()
 				goBack.runm()
-				
+
+# set up animation blit functions:
 	def animationBlitm(self,x,y):
 		self.blitmX = x-40
 		self.blitmY = y-40
 		moleAnim.blit(self.screen,(self.blitmX,self.blitmY))
+		
 	def animationBlitd(self,x,y):
 		self.blitdX = x-40
 		self.blitdY = y-40
@@ -600,6 +552,7 @@ class game:
 		self.blitY = y-80
 		boomAnim.blit(self.screen,(self.blitX,self.blitY))	
 
+# return to the menu:
 if __name__ == "__main__" :
         play = game()
         play.run()
