@@ -457,6 +457,7 @@ class game:
 		game.screen = pygame.display.set_mode((self.size),0,32)
 		
 		playerScore = 0
+		veggieTotal = 36
 		
 		self.owSound = pygame.mixer.Sound('data/Music/ow.wav')
 		
@@ -584,8 +585,6 @@ class game:
 
 				goBack = menu.run()
 				goBack.runm()
-				
-				file.close()
 				
 	def animationBlitm(self,x,y):
 		self.blitmX = x-40
